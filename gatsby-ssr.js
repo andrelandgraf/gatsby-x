@@ -1,7 +1,7 @@
-/**
- * Implement Gatsby's SSR (Server Side Rendering) APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/ssr-apis/
- */
+// import logger before doing anything else
+import './src/utilities/logger';
+import CustomProviders from './wrapWithProvider';
+import CustomLayout from './wrapPageElement';
 
-// You can delete this file if you're not using it
+export const wrapPageElement = CustomLayout;
+export const wrapRootElement = CustomProviders;
