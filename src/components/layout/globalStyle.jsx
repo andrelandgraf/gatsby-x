@@ -30,47 +30,40 @@ h1 {
   font-size: ${STYLES.fontSizes.xxl};
   font-weight: ${STYLES.fontWeights.normal};
   color: ${({ theme }) => theme.colors.headlines};
-  margin: 20px 0;
-
-  @media screen and (max-width: ${STYLES.breakpoints.phoneWidth}px) {
-    margin: 10px 0;
-  }
+  margin: 0;
 }
 
 h2 {
   font-size: ${STYLES.fontSizes.m};
   font-weight: ${STYLES.fontWeights.normal};
   color: ${({ theme }) => theme.colors.headlines};
-  margin: 20px 0;
+  margin: 0;
 
   @media screen and (max-width: ${STYLES.breakpoints.phoneWidth}px) {
-    margin: 10px 0;
     max-width: 90vw;
   }
 }
 
 h3 {
-  margin: 20px 0;
+  margin: 0;
   font-size: ${STYLES.fontSizes.s};
   font-weight: ${STYLES.fontWeights.normal};
   color: ${({ theme }) => theme.colors.headlines};
   max-width: 50vw;
 
   @media screen and (max-width: ${STYLES.breakpoints.phoneWidth}px) {
-      margin: 10px 0;
       max-width: 90vw;
   }
 }
 
 h4 {
-  margin: 20px 0;
+  margin: 0;
   font-size: ${STYLES.fontSizes.s};
   font-weight: ${STYLES.fontWeights.medium};
   color: ${({ theme }) => theme.colors.headlines};
   max-width: 50vw;
 
   @media screen and (max-width: ${STYLES.breakpoints.phoneWidth}px) {
-      margin: 10px 0;
       max-width: 90vw;
   }
 }
@@ -81,10 +74,9 @@ p {
   line-height: 1.8;
   font-size: ${STYLES.fontSizes.s};
   max-width: 800px;
-  margin: 20px 0;
+  margin: 0;
 
   @media screen and (max-width: ${STYLES.breakpoints.phoneWidth}px) {
-    margin: 10px 0;
     max-width: 90vw;
   }
 
@@ -104,6 +96,7 @@ ul {
 }
 
 li {
+  margin: 0;
   line-height: 1.8;
   padding: 2px;
   font-size: ${STYLES.fontSizes.s};
@@ -189,7 +182,7 @@ input:not([type='checkbox']):not([type='submit']) {
   background-image: none;
   border: 1px solid ${({ theme }) => theme.colors.font};
   color: ${({ theme }) => theme.colors.font};
-  border-radius:0;
+  border-radius: 10px;
   transition:border-color .25s ease, box-shadow .25s ease;
   &:focus {
     outline: 0;

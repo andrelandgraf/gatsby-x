@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 
-import { ReactComponent as Logo } from '../../assets/svgs/gatsby.svg';
+import { ReactComponent as Logo } from '../../assets/svgs/gatsbyx.svg';
 import { ReactComponent as Night } from '../../assets/svgs/night.svg';
 
 import { CustomThemeContext } from '../../contexts/theme';
 import CustomButton from '../clickables/customButton';
+import CustomLink from '../clickables/customLink';
 
 const FixedHeader = styled.header`
   top: 0;
@@ -26,21 +27,21 @@ const Navigation = styled.nav`
 `;
 
 const Branding = styled.div`
-  display: inline-flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  justify-items: center;
   margin-left: 5vw;
   svg {
-    margin-right: 10px;
-    width: 40px;
+    width: 120px;
+    fill: ${({ theme }) => theme.colors.headlines};
   }
+`;
+
+const List = styled.ul`
+  margin-left: auto;
+  margin-right: 5vw;
+  list-style-type: none;
 `;
 
 const Theming = styled.div`
   justify-self: flex-start;
-  margin-left: auto;
   margin-right: 5vw;
   svg {
     width: 28px;
@@ -65,10 +66,14 @@ const Header = ({ siteTitle }) => {
           <Link to="/">
             <Logo />
           </Link>
-          <Link to="/">
-            <h1 style={{ margin: 0 }}>{siteTitle}</h1>
-          </Link>
         </Branding>
+        <List>
+          <li>
+            <CustomLink link="/login" isPage>
+              Login
+            </CustomLink>
+          </li>
+        </List>
         <Theming>
           <CustomButton id="toggle-theme" onClick={toggle}>
             <Night />

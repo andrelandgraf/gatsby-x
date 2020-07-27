@@ -54,6 +54,11 @@ const StyledButton = styled.button`
     box-shadow: none;
     transform: translateY(0.5px);
   }
+
+  &.submit {
+    margin: 0 5px;
+    width: 100%;
+  }
 `;
 
 /**
@@ -65,11 +70,13 @@ const StyledButton = styled.button`
  * @param disabled if the button should be disabled (styling)
  */
 const Button = React.forwardRef(
-  ({ classes, label, onClick, primary, disabled }, ref) => (
+  ({ classes, label, onClick, primary, disabled, submit }, ref) => (
     <StyledButton
       ref={ref}
-      className={`${primary ? 'primary' : ''} ${classes}`}
-      type="button"
+      className={`${primary || submit ? 'primary' : ''} ${
+        submit ? 'submit' : ''
+      } ${classes}`}
+      type={submit ? 'submit' : 'button'}
       onClick={onClick}
       disabled={disabled}
     >
@@ -86,6 +93,7 @@ Button.propTypes = {
   onClick: PropTypes.func,
   primary: PropTypes.bool,
   disabled: PropTypes.bool,
+  submit: PropTypes.bool,
 };
 
 Button.defaultProps = {
@@ -94,6 +102,7 @@ Button.defaultProps = {
   onClick: undefined,
   primary: false,
   disabled: false,
+  submit: false,
 };
 
 export default Button;
