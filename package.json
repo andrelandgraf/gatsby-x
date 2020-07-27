@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "author": "Andre Landgraf",
   "dependencies": {
+    "@svgr/webpack": "^5.4.0",
     "axios": "^0.19.2",
     "babel-plugin-styled-components": "^1.10.7",
     "gatsby": "^2.23.12",
@@ -12,11 +13,11 @@
     "gatsby-plugin-manifest": "^2.4.14",
     "gatsby-plugin-offline": "^3.2.13",
     "gatsby-plugin-react-helmet": "^3.3.6",
-    "gatsby-plugin-react-svg": "^3.0.0",
     "gatsby-plugin-robots-txt": "^1.5.1",
     "gatsby-plugin-sharp": "^2.6.14",
     "gatsby-plugin-sitemap": "^2.4.11",
     "gatsby-plugin-styled-components": "^3.3.10",
+    "gatsby-plugin-svgr": "^2.0.2",
     "gatsby-source-filesystem": "^2.3.14",
     "gatsby-transformer-sharp": "^2.5.7",
     "logrocket": "^1.0.10",
@@ -46,8 +47,8 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.3",
     "eslint-plugin-react-hooks": "^1.7.0",
-    "prettier": "^1.19.1",
-    "svg-react-loader": "^0.4.6"
+    "playroom": "^0.21.2",
+    "prettier": "^1.19.1"
   },
   "keywords": [
     "gatsby"
@@ -62,7 +63,9 @@
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
     "storybook": "NODE_ENV=production start-storybook -s -p 6006",
-    "build-storybook": "NODE_ENV=production build-storybook -s -p --quiet"
+    "build-storybook": "NODE_ENV=production build-storybook -s -p --quiet",
+    "playroom:start": "playroom start",
+    "playroom:build": "playroom build"
   },
   "repository": {
     "type": "git",

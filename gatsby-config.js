@@ -16,14 +16,7 @@ module.exports = {
     image: '/images/Gatsby_Logo.png',
   },
   plugins: [
-    {
-      resolve: 'gatsby-plugin-react-svg',
-      options: {
-        rule: {
-          include: /svgs/,
-        },
-      },
-    },
+    'gatsby-plugin-svgr',
     `gatsby-plugin-styled-components`,
     `gatsby-image`,
     {

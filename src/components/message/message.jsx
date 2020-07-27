@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Info from '../../assets/svgs/info.svg';
-import Warning from '../../assets/svgs/warning.svg';
-import Success from '../../assets/svgs/success.svg';
-import Cancel from '../../assets/svgs/cancel.svg';
+import { ReactComponent as Info } from '../../assets/svgs/info.svg';
+import { ReactComponent as Warning } from '../../assets/svgs/warning.svg';
+import { ReactComponent as Success } from '../../assets/svgs/success.svg';
+import { ReactComponent as Cancel } from '../../assets/svgs/cancel.svg';
 
 import { MESSAGE_TYPES, STYLES } from '../../enums';
 import IconButton from '../clickables/customButton';

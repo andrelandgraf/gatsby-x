@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 
-import Logo from '../../assets/svgs/gatsby.svg';
-import Night from '../../assets/svgs/night.svg';
+import { ReactComponent as Logo } from '../../assets/svgs/gatsby.svg';
+import { ReactComponent as Night } from '../../assets/svgs/night.svg';
 
 import { CustomThemeContext } from '../../contexts/theme';
 import CustomButton from '../clickables/customButton';
