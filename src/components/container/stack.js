@@ -12,6 +12,7 @@ const Div = styled.div`
   row-gap: ${({ gap }) => gap};
   justify-items: ${({ centered }) => (centered ? 'center' : 'start')};
   align-items: ${({ centered }) => (centered ? 'center' : 'start')};
+  text-align: ${({ centered }) => (centered ? 'center' : 'left')};
   margin: ${({ margin }) => margin};
 
   @media screen and (max-width: ${STYLES.breakpoints.phoneWidth}px) {
