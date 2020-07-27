@@ -8,17 +8,25 @@ export default Object.freeze({
   colors: {
     white: '#fff',
     mattWhite: '#fcf7f8',
+    indigo: '#304FFE',
+    mattIndigo: '#3d5afe',
+    lightBlue: '#00b0ff',
+    mattLightBlue: '#03a0f0',
     black: '#000000',
-    logoYellow: '#f9c901',
+    yellow: '#f9c901',
     orangeYellow: '#fcb43a',
     honeyRed: '#992409',
     mattBlack: '#23212c',
     mattBlackLighter: '#44424e',
+    mattBlackLightest: '#777582',
     mattGrey: '#3a3637',
     mattGreyLighter: '#585455',
     brown: '#985b10',
     darkBrown: '#6b4701',
-    success: '#286d05',
+    success: '#15d2a7',
+    error: '#ff0033',
+    warning: '#fcb43a',
+    info: '#1890ff',
     disabled: '#757070',
     fontGrey: '#404040',
     fontWhite: '#f1edfd',
@@ -38,5 +46,16 @@ export default Object.freeze({
     semiBold: 600,
     bold: 700,
     heavy: 900,
+  },
+  hexToRgba: (hex, opacity) => {
+    const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    const parsed = hex.replace(shorthandRegex, function(m, r, g, b) {
+      return r + r + g + g + b + b;
+    });
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(parsed);
+    return `rgba(${parseInt(result[1], 16)},${parseInt(
+      result[2],
+      16
+    )},${parseInt(result[3], 16)},${opacity})`;
   },
 });

@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 import { STYLES } from '../../enums';
 
 const fonts =
-  'Avenir, Rubik, Lato,"Lucida Grande","Lucida Sans Unicode",Tahoma,Sans-Serif';
+  'Jura, Avenir, Rubik, Lato,"Lucida Grande","Lucida Sans Unicode",Tahoma,Sans-Serif';
 
 export default createGlobalStyle`
 * {
@@ -200,8 +200,9 @@ input:not([type='checkbox']):not([type='submit']) {
 .box {
   background-color: ${({ theme }) => theme.colors.background};
   border-radius: 4px;
-  border: 1px solid #d9d9d9; ;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border: 1px solid #d9d9d9;
+  box-shadow: 0 2px 8px ${({ theme }) =>
+    STYLES.hexToRgba(theme.colors.font, 0.15)};
 }
 
 .not-displayed {
@@ -219,16 +220,6 @@ input:not([type='checkbox']):not([type='submit']) {
 
   &:hover {
       cursor: pointer;
-      border-color: $hover-primary-color;
-      outline: 0;
-      box-shadow: 0 0 0 2px rgba(201, 148, 91, 0.884);
-  }
-
-  &:focus {
-      background-image: none;
-      outline: 0;
-      -webkit-box-shadow: none;
-      box-shadow: none;
   }
 }
 `;

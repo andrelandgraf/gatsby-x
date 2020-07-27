@@ -14,20 +14,22 @@ const themes = {
     colors: {
       background: STYLES.colors.mattBlack,
       boxBackground: STYLES.colors.mattBlackLighter,
+      buttonBackground: STYLES.colors.mattBlackLightest,
       headlines: STYLES.colors.white,
       font: STYLES.colors.fontWhite,
-      primary: STYLES.colors.orangeYellow,
-      secondary: STYLES.colors.honeyRed,
+      primary: STYLES.colors.indigo,
+      secondary: STYLES.colors.mattIndigo,
     },
   },
   light: {
     colors: {
       background: STYLES.colors.white,
-      boxBackground: STYLES.colors.font,
+      boxBackground: STYLES.colors.fontWhite,
+      buttonBackground: STYLES.colors.mattWhite,
       headlines: STYLES.colors.black,
       font: STYLES.colors.fontGrey,
-      primary: STYLES.colors.honeyRed,
-      secondary: STYLES.colors.orangeYellow,
+      primary: STYLES.colors.lightBlue,
+      secondary: STYLES.colors.mattLightBlue,
     },
   },
 };

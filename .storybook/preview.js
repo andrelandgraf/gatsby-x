@@ -4,7 +4,6 @@ import { addDecorator } from '@storybook/react';
 
 import CustomDecorator from "./index"
 
-
 import '../src/utilities/logger';
 
 // https://github.com/gatsbyjs/gatsby/issues/10668#issuecomment-639014099

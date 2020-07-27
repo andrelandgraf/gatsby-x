@@ -15,24 +15,23 @@ const StyledButton = styled.button`
   border: 1px solid transparent;
   padding: 8px 16px;
   font-size: ${STYLES.fontSizes.m};
-  color: ${({ theme }) => theme.colors.font};
-  background-color: ${({ theme }) => theme.colors.background};
-  border-color: ${({ theme }) => theme.colors.font};
+  color: ${({ theme }) => theme.colors.headlines};
+  background-color: ${({ theme }) => theme.colors.buttonBackground};
+  border-color: ${({ theme }) => theme.colors.buttonBackground};
+  border-radius: 10px;
+  box-shadow: 0 2px 8px
+    ${({ theme }) => STYLES.hexToRgba(theme.colors.font, 0.15)};
+  text-shadow: 0 -1px 0 ${({ theme }) => STYLES.hexToRgba(theme.colors.font, 0.15)};
   &.primary {
     color: ${({ theme }) => theme.colors.headlines};
     background-color: ${({ theme }) => theme.colors.primary};
     border-color: ${({ theme }) => theme.colors.primary};
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
-    -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
-    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
     &:hover {
-      color: ${({ theme }) => theme.colors.headlines};
-      background-color: ${STYLES.colors.background};
+      background-color: ${({ theme }) => theme.colors.secondary};
       border-color: ${({ theme }) => theme.colors.secondary};
     }
     &:focus {
-      color: ${({ theme }) => theme.colors.headlines};
-      background-color: ${STYLES.colors.background};
+      background-color: ${({ theme }) => theme.colors.secondary};
       border-color: ${({ theme }) => theme.colors.secondary};
     }
   }
@@ -40,23 +39,20 @@ const StyledButton = styled.button`
     color: rgba(0, 0, 0, 0.25);
     background-color: #f5f5f5;
     border-color: #d9d9d9;
-    text-shadow: none;
-    -webkit-box-shadow: none;
-    box-shadow: none;
+    pointer-events: none;
   }
   &:hover {
-    color: ${({ theme }) => theme.colors.font};
     background-color: ${({ theme }) => theme.colors.secondary};
-    border-color: ${({ theme }) => theme.colors.font};
+    border-color: ${({ theme }) => theme.colors.secondary};
   }
   &:focus {
-    color: ${({ theme }) => theme.colors.font};
     background-color: ${({ theme }) => theme.colors.seconday};
-    border-color: ${({ theme }) => theme.colors.font};
+    border-color: ${({ theme }) => theme.colors.seconday};
   }
   &:active {
     -webkit-box-shadow: none;
     box-shadow: none;
+    transform: translateY(0.5px);
   }
 `;
 

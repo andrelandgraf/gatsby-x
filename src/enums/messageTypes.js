@@ -1,6 +1,6 @@
 export default Object.freeze({
   success: 'success',
-  error: 'err',
+  error: 'error',
   warning: 'warning',
   info: 'info',
 });
