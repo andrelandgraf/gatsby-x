@@ -12,6 +12,7 @@ const Div = styled.div`
   margin: ${({ margin }) => margin};
 
   @media screen and (max-width: ${STYLES.breakpoints.phoneWidth}px) {
+    grid-template-columns: 1fr;
     width: 100%;
   }
 `;
