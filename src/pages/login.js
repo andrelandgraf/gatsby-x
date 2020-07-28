@@ -2,33 +2,29 @@ import React, { useState, useCallback, useContext, useEffect } from 'react';
 import { navigate } from 'gatsby';
 import styled from 'styled-components';
 
-import { LOADING_STATUS, STYLES } from '../enums';
+import { LOADING_STATUS, STYLES, MESSAGE_TYPES } from '../enums';
 import { getOnLoginRedirect } from '../utilities/storage';
 import { logUserIn, applyResetPw } from '../services/gatsbyx-backend/user';
 import { BrowserContext } from '../contexts/browser';
-import {
-  MessageContext,
-  MESSAGE_TYPES,
-  MessageProvider,
-} from '../contexts/message';
+import { MessageContext } from '../contexts/message';
 import { UserContext } from '../contexts/user';
 import useStatus from '../hooks/useStatus';
 import { Button, Stack, CustomLink } from '../components';
 import SEO from '../components/layout/seo';
 
 const Form = styled.form`
-  margin: auto;
+  width: 100%;
   @media screen and (min-width: ${STYLES.breakpoints.padWidth}px) {
-    max-width: 400px;
+    width: 400px;
   }
 `;
 
 const Centered = styled.div`
-  margin: auto;
-  @media screen and (min-width: ${STYLES.breakpoints.padWidth}px) {
-    max-width: 400px;
-  }
+  width: 100%;
   text-align: center;
+  @media screen and (min-width: ${STYLES.breakpoints.padWidth}px) {
+    width: 400px;
+  }
 `;
 
 const tag = 'LoginContainer';
@@ -138,7 +134,7 @@ const LoginPage = () => {
 
   if (status === LOADING_STATUS.hasSucceeded && forgotPassword) {
     return (
-      <MessageProvider>
+      <>
         <SEO title="Forgot" shouldIndex={false} />
         <Centered>
           <Stack gap="20px">
@@ -146,14 +142,13 @@ const LoginPage = () => {
               <h1>Forgot password</h1>
             </Stack>
             <h2>Please check your mailbox</h2>
-            <Button label="back" onClick={() => navigate('/login')} primary />
           </Stack>
         </Centered>
-      </MessageProvider>
+      </>
     );
   }
   return (
-    <MessageProvider>
+    <>
       <SEO title={forgotPassword ? 'Forgot' : 'Login'} shouldIndex={false} />
       <Form onSubmit={handleSubmit}>
         <Stack gap="20px">
@@ -203,7 +198,7 @@ const LoginPage = () => {
           </p>
         </Stack>
       </Form>
-    </MessageProvider>
+    </>
   );
 };
 

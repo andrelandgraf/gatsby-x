@@ -61,14 +61,6 @@ const StyledButton = styled.button`
   }
 `;
 
-/**
- * Standard button component
- * @param classes further css classes
- * @param label a label for the button
- * @param onClick function
- * @param primary if its a primary button (styling)
- * @param disabled if the button should be disabled (styling)
- */
 const Button = React.forwardRef(
   ({ classes, label, onClick, primary, disabled, submit }, ref) => (
     <StyledButton

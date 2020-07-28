@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -15,13 +15,14 @@ const MessageBox = styled.div`
   display: flex;
   align-items: center;
   padding: 2vh 2vw;
-  margin: 0 auto;
+  margin: 0;
   min-width: 50%;
   max-width: 70%;
+  text-align: left;
   @media screen and (max-width: ${STYLES.breakpoints.phoneWidth}px) {
     font-size: ${STYLES.fontSizes.xs};
-    padding: 1vh 1vw;
     width: 100%;
+    min-width: 100%;
   }
   &.error-message {
     background-color: ${STYLES.colors.error};
@@ -54,6 +55,16 @@ const MessageBox = styled.div`
 
   svg {
     width: 30px;
+    @media screen and (max-width: ${STYLES.breakpoints.phoneWidth}px) {
+      width: 60px;
+    }
+  }
+
+  .gamify-icon {
+    display: block;
+    @media screen and (max-width: ${STYLES.breakpoints.phoneWidth}px) {
+      display: none;
+    }
   }
 `;
 
@@ -62,6 +73,9 @@ const MessageText = styled.div`
   padding-right: 20px;
   max-width: 600px;
   font-weight: ${STYLES.fontWeights.normal};
+  @media screen and (max-width: ${STYLES.breakpoints.phoneWidth}px) {
+    margin: 0 auto 0 0;
+  }
   h4 {
     color: ${STYLES.colors.fontWhite};
     font-weight: ${STYLES.fontWeights.semiBold};
@@ -76,21 +90,35 @@ const MessageText = styled.div`
  * @param onResolve function to e.g. close the message
  * @param classes further css classes for styling
  */
-const Message = ({ type, message, onResolve, classes }) => (
-  <MessageBox className={`box ${type}-message ${classes}`}>
-    {type === MESSAGE_TYPES.error && <Warning />}
-    {type === MESSAGE_TYPES.warning && <Warning />}
-    {type === MESSAGE_TYPES.info && <Info />}
-    {type === MESSAGE_TYPES.success && <Success />}
-    <MessageText>
-      <h4>{type}</h4>
-      <span>{message}</span>
-    </MessageText>
-    <IconButton id="dismiss-message" alt="dismiss message" onClick={onResolve}>
-      <Cancel />
-    </IconButton>
-  </MessageBox>
-);
+const Message = ({ type, message, onResolve, classes }) => {
+  const gamifyIcon = useMemo(() => {
+    switch (type) {
+      case MESSAGE_TYPES.error:
+      case MESSAGE_TYPES.warning:
+        return <Warning className="gamify-icon" />;
+      case MESSAGE_TYPES.success:
+        return <Success className="gamify-icon" />;
+      default:
+        return <Info className="gamify-icon" />;
+    }
+  }, [type]);
+  return (
+    <MessageBox className={`box ${type}-message ${classes}`}>
+      {gamifyIcon}
+      <MessageText>
+        <h4>{type}</h4>
+        <span>{message}</span>
+      </MessageText>
+      <IconButton
+        id="dismiss-message"
+        alt="dismiss message"
+        onClick={onResolve}
+      >
+        <Cancel />
+      </IconButton>
+    </MessageBox>
+  );
+};
 
 Message.propTypes = {
   message: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,

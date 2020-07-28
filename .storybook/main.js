@@ -32,7 +32,7 @@ module.exports = {
     config.module.rules.push({
       test: /\.svg$/,
       enforce: "pre",
-      loader: require.resolve("svg-react-loader")
+      use: ['@svgr/webpack', 'url-loader'],
     });
 
     return config

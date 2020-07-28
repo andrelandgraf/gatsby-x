@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Message from '../components/message/message';
 
-import MESSAGE_TYPES from '../enums/messageTypes';
+import { MESSAGE_TYPES } from '../enums';
+import { Stack } from '../components';
 
 // new context
 const MessageContext = React.createContext({
@@ -26,7 +27,7 @@ function MessageProvider({ children }) {
 
   return (
     <MessageContext.Provider value={context}>
-      <div className="message-container">
+      <Stack gap="10vh">
         {message && (
           <Message
             message={message}
@@ -35,7 +36,7 @@ function MessageProvider({ children }) {
           />
         )}
         {children}
-      </div>
+      </Stack>
     </MessageContext.Provider>
   );
 }

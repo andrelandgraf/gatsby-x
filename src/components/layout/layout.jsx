@@ -11,6 +11,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
 
 import { STYLES } from '../../enums';
+import { MessageProvider } from '../../contexts/message';
 import GlobalStyle from './globalStyle';
 import Header from './header';
 import Footer from './footer';
@@ -49,7 +50,9 @@ const Layout = ({ children }) => {
     <Page>
       <GlobalStyle />
       <Header siteTitle={data.site.siteMetadata.title} />
-      <Content>{children}</Content>
+      <Content>
+        <MessageProvider>{children}</MessageProvider>
+      </Content>
       <Footer />
     </Page>
   );

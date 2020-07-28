@@ -35,14 +35,18 @@ const Branding = styled.div`
 `;
 
 const List = styled.ul`
+  display: flex;
   margin-left: auto;
-  margin-right: 5vw;
   list-style-type: none;
+
+  li {
+    margin-right: 2vw;
+  }
 `;
 
 const Theming = styled.div`
   justify-self: flex-start;
-  margin-right: 5vw;
+  margin: 0 5vw 0 5vw;
   svg {
     width: 28px;
   }
@@ -68,6 +72,11 @@ const Header = ({ siteTitle }) => {
           </Link>
         </Branding>
         <List>
+          <li>
+            <CustomLink link="/signup" isPage>
+              Signup
+            </CustomLink>
+          </li>
           <li>
             <CustomLink link="/login" isPage>
               Login
