@@ -1,7 +1,8 @@
 import React, { useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
+import { motion } from 'framer-motion';
 
 import { ReactComponent as Logo } from '../../assets/svgs/gatsbyx.svg';
 import { ReactComponent as Night } from '../../assets/svgs/night.svg';
@@ -10,7 +11,7 @@ import { CustomThemeContext } from '../../contexts/theme';
 import CustomButton from '../clickables/customButton';
 import CustomLink from '../clickables/customLink';
 
-const FixedHeader = styled.header`
+const FixedHeader = styled(motion.header)`
   top: 0;
   left: 0;
   position: fixed;
@@ -53,18 +54,22 @@ const Theming = styled.div`
 `;
 
 const Header = ({ siteTitle }) => {
-  const { themeKeys, theme, switchTheme } = useContext(CustomThemeContext);
+  const { themeKeys, theme: key, switchTheme } = useContext(CustomThemeContext);
+  const theme = useContext(ThemeContext);
 
   const toggle = useCallback(() => {
-    if (theme === themeKeys.light) {
+    if (key === themeKeys.light) {
       switchTheme(themeKeys.dark);
-    } else if (theme === themeKeys.dark) {
+    } else if (key === themeKeys.dark) {
       switchTheme(themeKeys.light);
     }
-  }, [themeKeys, theme, switchTheme]);
+  }, [themeKeys, key, switchTheme]);
 
   return (
-    <FixedHeader>
+    <FixedHeader
+      animate={{ backgroundColor: theme.colors.background }}
+      transition={{ duration: 0.85 }}
+    >
       <Navigation>
         <Branding>
           <Link to="/">

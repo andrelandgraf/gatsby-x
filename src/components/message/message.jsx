@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 import { ReactComponent as Info } from '../../assets/svgs/info.svg';
 import { ReactComponent as Warning } from '../../assets/svgs/warning.svg';
@@ -10,8 +11,7 @@ import { ReactComponent as Cancel } from '../../assets/svgs/cancel.svg';
 import { MESSAGE_TYPES, STYLES } from '../../enums';
 import IconButton from '../clickables/customButton';
 
-//   box-shadow: none;
-const MessageBox = styled.div`
+const MessageBox = styled(motion.div)`
   display: flex;
   align-items: center;
   padding: 2vh 2vw;
@@ -55,9 +55,6 @@ const MessageBox = styled.div`
 
   svg {
     width: 30px;
-    @media screen and (max-width: ${STYLES.breakpoints.phoneWidth}px) {
-      width: 60px;
-    }
   }
 
   .gamify-icon {
@@ -103,7 +100,16 @@ const Message = ({ type, message, onResolve, classes }) => {
     }
   }, [type]);
   return (
-    <MessageBox className={`box ${type}-message ${classes}`}>
+    <MessageBox
+      className={`box ${type}-message ${classes}`}
+      initial="visible"
+      animate="visible"
+      exit="hidden"
+      variants={{
+        visible: { opacity: 1, transition: { duration: 2 } },
+        hidden: { opacity: 0, transition: { duration: 0.6 } },
+      }}
+    >
       {gamifyIcon}
       <MessageText>
         <h4>{type}</h4>

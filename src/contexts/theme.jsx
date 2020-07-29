@@ -35,7 +35,7 @@ const themes = {
 };
 
 const CustomThemeContext = React.createContext({
-  theme: themeKeys.light,
+  theme: themes.light,
   setTheme: () => {},
   themeKeys,
 });

@@ -5,18 +5,18 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useStaticQuery, graphql } from 'gatsby';
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
+import { motion } from 'framer-motion';
 
 import { STYLES } from '../../enums';
-import { MessageProvider } from '../../contexts/message';
 import GlobalStyle from './globalStyle';
 import Header from './header';
 import Footer from './footer';
 
-const Page = styled.div`
+const Page = styled(motion.div)`
   position: relative;
   width: 100vw;
   max-width: 3600px;
@@ -36,6 +36,7 @@ const Content = styled.main`
 `;
 
 const Layout = ({ children }) => {
+  const theme = useContext(ThemeContext);
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -47,12 +48,13 @@ const Layout = ({ children }) => {
   `);
 
   return (
-    <Page>
+    <Page
+      animate={{ backgroundColor: theme.colors.background }}
+      transition={{ duration: 0.85 }}
+    >
       <GlobalStyle />
       <Header siteTitle={data.site.siteMetadata.title} />
-      <Content>
-        <MessageProvider>{children}</MessageProvider>
-      </Content>
+      <Content>{children}</Content>
       <Footer />
     </Page>
   );

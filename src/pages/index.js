@@ -109,6 +109,7 @@ const IndexPage = () => (
         <Grid gap="20px">
           {treats.map(treat => (
             <Box
+              key={treat.name}
               name={treat.name}
               reasoning={treat.reasoning}
               link={treat.link}

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Message from '../components/message/message';
+import { AnimatePresence } from 'framer-motion';
 
 import { MESSAGE_TYPES } from '../enums';
 import { Stack } from '../components';
+import Message from '../components/message/message';
 
-// new context
 const MessageContext = React.createContext({
   message: '',
   setMessage: () => {},
@@ -13,7 +13,6 @@ const MessageContext = React.createContext({
   setType: () => {},
 });
 
-// corresponding provider component
 function MessageProvider({ children }) {
   const [message, setMessage] = useState('');
   const [type, setType] = useState(MESSAGE_TYPES.INFO);
@@ -27,14 +26,17 @@ function MessageProvider({ children }) {
 
   return (
     <MessageContext.Provider value={context}>
-      <Stack gap="10vh">
-        {message && (
-          <Message
-            message={message}
-            type={type}
-            onResolve={() => setMessage('')}
-          />
-        )}
+      <Stack gap="10vh" useMotion>
+        <AnimatePresence>
+          {message && (
+            <Message
+              key="message"
+              message={message}
+              type={type}
+              onResolve={() => setMessage('')}
+            />
+          )}
+        </AnimatePresence>
         {children}
       </Stack>
     </MessageContext.Provider>

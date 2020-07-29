@@ -1,8 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 import { STYLES } from '../../enums';
+
+const spring = {
+  type: 'spring',
+  stiffness: 700,
+  damping: 100,
+};
 
 const Div = styled.div`
   ${({ collapse }) => (collapse ? '' : 'width: 100%;')}
@@ -20,10 +27,27 @@ const Div = styled.div`
   }
 `;
 
-const Stack = ({ children, collapse, centered, gap, margin }) => (
-  <Div collapse={collapse} gap={gap} margin={margin} centered={centered}>
-    {children}
-  </Div>
+const MotionedDiv = motion.custom(Div);
+
+const Stack = ({ children, collapse, centered, gap, margin, useMotion }) => (
+  <>
+    {useMotion ? (
+      <MotionedDiv
+        collapse={collapse}
+        gap={gap}
+        margin={margin}
+        centered={centered}
+        layout
+        transition={spring}
+      >
+        {children}
+      </MotionedDiv>
+    ) : (
+      <Div collapse={collapse} gap={gap} margin={margin} centered={centered}>
+        {children}
+      </Div>
+    )}
+  </>
 );
 
 Stack.propTypes = {
@@ -35,6 +59,7 @@ Stack.propTypes = {
   centered: PropTypes.bool,
   gap: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   margin: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  useMotion: PropTypes.bool,
 };
 
 Stack.defaultProps = {
@@ -42,6 +67,7 @@ Stack.defaultProps = {
   centered: true,
   gap: 0,
   margin: 0,
+  useMotion: false,
 };
 
 export default Stack;
