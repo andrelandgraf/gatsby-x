@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 
 import { ReactComponent as Logo } from '../../assets/svgs/gatsbyx.svg';
 import { ReactComponent as Night } from '../../assets/svgs/night.svg';
+import { ReactComponent as Day } from '../../assets/svgs/day.svg';
 
 import { CustomThemeContext } from '../../contexts/theme';
 import CustomButton from '../clickables/customButton';
@@ -69,6 +70,7 @@ const Header = ({ siteTitle }) => {
     <FixedHeader
       animate={{ backgroundColor: theme.colors.background }}
       transition={{ duration: 0.85 }}
+      initial={false}
     >
       <Navigation>
         <Branding>
@@ -90,7 +92,7 @@ const Header = ({ siteTitle }) => {
         </List>
         <Theming>
           <CustomButton id="toggle-theme" onClick={toggle}>
-            <Night />
+            {key === themeKeys.light ? <Night /> : <Day />}
           </CustomButton>
         </Theming>
       </Navigation>

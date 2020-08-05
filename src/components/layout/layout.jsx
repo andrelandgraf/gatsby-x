@@ -51,6 +51,7 @@ const Layout = ({ children }) => {
     <Page
       animate={{ backgroundColor: theme.colors.background }}
       transition={{ duration: 0.85 }}
+      initial={false}
     >
       <GlobalStyle />
       <Header siteTitle={data.site.siteMetadata.title} />

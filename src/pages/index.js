@@ -23,6 +23,24 @@ const treats = [
     link: 'https://styled-components.com/',
   },
   {
+    name: 'Framer Motion',
+    reasoning:
+      'Doing animaitons right is hard. Doing animations in React is easy. The only struggle that stays: how not to overdo it...',
+    link: 'https://www.framer.com/motion/',
+  },
+  {
+    name: 'Storybook',
+    reasoning:
+      'Judge and showcase each React component in isolation. Perfect tool for iterating on your design system.',
+    link: 'https://github.com/seek-oss/playroom',
+  },
+  {
+    name: 'Playroom',
+    reasoning:
+      'Just started using Playroom but I already love it. Rapid JSX prototyping.',
+    link: 'https://github.com/seek-oss/playroom',
+  },
+  {
     name: 'LogRocket',
     reasoning:
       'Easy to use and amazing free-tier logging software for bug tracking.',
@@ -45,18 +63,6 @@ const treats = [
     reasoning:
       'My favorite tech podcast. Can and should be considered as part of my tech stack.',
     link: 'https://syntax.fm/',
-  },
-  {
-    name: 'Storybook',
-    reasoning:
-      'Judge and showcase each React component in isolation. Perfect tool for iterating on your design system.',
-    link: 'https://github.com/seek-oss/playroom',
-  },
-  {
-    name: 'Playroom',
-    reasoning:
-      'Just started using Playroom but I already love it. Rapid JSX prototyping.',
-    link: 'https://github.com/seek-oss/playroom',
   },
   {
     name: 'axios',
