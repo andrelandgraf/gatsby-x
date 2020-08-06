@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 
-const CustomLink = ({ children, link, isPage, isLink, newTab, onClick }) => (
+const CustomLink = ({ children, link, isPage, newTab, onClick }) => (
   <>
     {newTab ? (
       <a
         href={link}
-        className={`${isPage ? 'page' : ''} ${isLink && !isPage ? 'link' : ''}`}
+        className={`${isPage ? 'page' : ''}`}
         target="_blank"
         rel="noopener noreferrer"
         onClick={onClick}
@@ -17,7 +17,7 @@ const CustomLink = ({ children, link, isPage, isLink, newTab, onClick }) => (
     ) : (
       <Link
         to={link}
-        className={`${isPage ? 'page' : ''} ${isLink && !isPage ? 'link' : ''}`}
+        className={`${isPage ? 'page' : ''}`}
         activeClassName={`${isPage ? 'current-page' : ''}`}
         onClick={onClick}
       >
@@ -34,14 +34,12 @@ CustomLink.propTypes = {
   ]).isRequired,
   link: PropTypes.string.isRequired,
   isPage: PropTypes.bool,
-  isLink: PropTypes.bool,
   newTab: PropTypes.bool,
   onClick: PropTypes.func,
 };
 
 CustomLink.defaultProps = {
   isPage: false,
-  isLink: true,
   newTab: false,
   onClick: undefined,
 };

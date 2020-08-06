@@ -29,9 +29,8 @@ const Content = styled.main`
   overflow-x: hidden;
   margin: 20vh 5vw 15vh 5vw;
   min-height: 70vh;
-  @media screen and (orientation: landscape) and (max-width: ${STYLES
-      .breakpoints.phoneWidth}px) {
-    margin-top: 10vh;
+  @media screen and (max-width: ${STYLES.breakpoints.phoneWidth}px) {
+    margin-top: 30vh;
   }
 `;
 

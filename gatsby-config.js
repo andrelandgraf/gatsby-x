@@ -16,7 +16,8 @@ module.exports = {
     image: '/images/Gatsby_Logo.png',
   },
   plugins: [
-    'gatsby-plugin-svgr',
+    `gatsby-plugin-mdx`,
+    `gatsby-plugin-svgr`,
     `gatsby-plugin-styled-components`,
     `gatsby-image`,
     {

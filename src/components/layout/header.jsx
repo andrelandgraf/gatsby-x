@@ -1,6 +1,5 @@
-import React, { useContext, useCallback } from 'react';
+import React, { useContext, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'gatsby';
 import styled, { ThemeContext } from 'styled-components';
 import { motion } from 'framer-motion';
 
@@ -8,6 +7,7 @@ import { ReactComponent as Logo } from '../../assets/svgs/gatsbyx.svg';
 import { ReactComponent as Night } from '../../assets/svgs/night.svg';
 import { ReactComponent as Day } from '../../assets/svgs/day.svg';
 
+import { STYLES } from '../../enums';
 import { CustomThemeContext } from '../../contexts/theme';
 import CustomButton from '../clickables/customButton';
 import CustomLink from '../clickables/customLink';
@@ -19,6 +19,10 @@ const FixedHeader = styled(motion.header)`
   width: 100vw;
   z-index: 10;
   background-color: ${({ theme }) => theme.colors.background};
+
+  ul {
+    padding-inline-start: 0;
+  }
 `;
 
 const Navigation = styled.nav`
@@ -28,17 +32,44 @@ const Navigation = styled.nav`
   align-items: center;
 `;
 
+const NavigationMobile = styled.nav`
+  padding: 0 0 1vh 5vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+
+  @media screen and (min-width: ${STYLES.breakpoints.phoneWidth}px) {
+    display: none;
+  }
+`;
+
 const Branding = styled.div`
-  margin-left: 5vw;
+  margin: 0 5vw 0 5vw;
   svg {
     width: 120px;
     fill: ${({ theme }) => theme.colors.headlines};
   }
 `;
 
-const List = styled.ul`
+const QuickNavRight = styled.ul`
   display: flex;
   margin-left: auto;
+  list-style-type: none;
+
+  li {
+    margin-right: 2vw;
+  }
+`;
+
+const HideOnMobile = styled.div`
+  @media screen and (max-width: ${STYLES.breakpoints.phoneWidth}px) {
+    display: none;
+  }
+`;
+
+const MainNav = styled.ul`
+  display: flex;
   list-style-type: none;
 
   li {
@@ -54,6 +85,17 @@ const Theming = styled.div`
   }
 `;
 
+const pages = [
+  {
+    name: 'README',
+    link: '/readme',
+  },
+  {
+    name: 'VS Code',
+    link: '/vscode',
+  },
+];
+
 const Header = ({ siteTitle }) => {
   const { themeKeys, theme: key, switchTheme } = useContext(CustomThemeContext);
   const theme = useContext(ThemeContext);
@@ -66,6 +108,21 @@ const Header = ({ siteTitle }) => {
     }
   }, [themeKeys, key, switchTheme]);
 
+  const mainNav = useMemo(
+    () => (
+      <MainNav>
+        {pages.map(page => (
+          <li key={page.name}>
+            <CustomLink link={page.link} isPage>
+              {page.name}
+            </CustomLink>
+          </li>
+        ))}
+      </MainNav>
+    ),
+    []
+  );
+
   return (
     <FixedHeader
       animate={{ backgroundColor: theme.colors.background }}
@@ -74,11 +131,12 @@ const Header = ({ siteTitle }) => {
     >
       <Navigation>
         <Branding>
-          <Link to="/">
+          <CustomLink link="/" isPage>
             <Logo />
-          </Link>
+          </CustomLink>
         </Branding>
-        <List>
+        <HideOnMobile>{mainNav}</HideOnMobile>
+        <QuickNavRight>
           <li>
             <CustomLink link="/signup" isPage>
               Signup
@@ -89,13 +147,14 @@ const Header = ({ siteTitle }) => {
               Login
             </CustomLink>
           </li>
-        </List>
+        </QuickNavRight>
         <Theming>
           <CustomButton id="toggle-theme" onClick={toggle}>
             {key === themeKeys.light ? <Night /> : <Day />}
           </CustomButton>
         </Theming>
       </Navigation>
+      <NavigationMobile>{mainNav}</NavigationMobile>
     </FixedHeader>
   );
 };

@@ -2,17 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { STYLES } from '../../enums';
+import { STYLES } from '../../../enums';
 
 const Div = styled.div`
   ${({ collapse }) => (collapse ? '' : 'width: 100%;')}
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
   grid-gap: ${({ gap }) => gap};
   margin: ${({ margin }) => margin};
 
   @media screen and (max-width: ${STYLES.breakpoints.phoneWidth}px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     width: 100%;
   }
 `;

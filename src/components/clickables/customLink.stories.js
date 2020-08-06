@@ -14,7 +14,7 @@ export const withPageLink = () => (
 );
 
 export const withNewTab = () => (
-  <CustomLink link="/login" newTab isLink>
+  <CustomLink link="/login" newTab>
     This is a Link to a new tab.
   </CustomLink>
 );

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-import { STYLES } from '../../enums';
+import { STYLES } from '../../../enums';
 
 const spring = {
   type: 'spring',
@@ -14,8 +14,7 @@ const spring = {
 const Div = styled.div`
   ${({ collapse }) => (collapse ? '' : 'width: 100%;')}
   display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: auto;
+  grid-template-columns: minmax(0, 1fr);
   row-gap: ${({ gap }) => gap};
   justify-items: ${({ centered }) => (centered ? 'center' : 'start')};
   align-items: ${({ centered }) => (centered ? 'center' : 'start')};

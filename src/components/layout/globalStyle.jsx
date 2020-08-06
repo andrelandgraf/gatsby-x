@@ -85,6 +85,11 @@ p {
   }
 }
 
+pre {
+  max-width: 800px;
+  overflow: auto;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
   color: ${({ theme }) => theme.colors.font};
@@ -92,7 +97,6 @@ code {
 
 ul {
   margin: 0;
-  padding-inline-start: 0;
 }
 
 li {
@@ -104,32 +108,26 @@ li {
 }
 
 a {
+  padding: 0;
   touch-action: manipulation;
+  text-decoration: underline;
+  color: ${({ theme }) => theme.colors.font};
+  text-decoration-color: ${({ theme }) => theme.colors.font};
+
   &:hover {
-      cursor: pointer;
+    cursor: pointer;
+    color: ${({ theme }) => theme.colors.primary};
+    text-decoration-color: ${({ theme }) => theme.colors.primary};
   }
 
-  padding: 0;
-  text-decoration: none;
   :focus {
     outline: 0;
-  }
-
-  &.link {
-    text-decoration: underline;
-    color: ${({ theme }) => theme.colors.font};
-    text-decoration-color: ${({ theme }) => theme.colors.font};
-    :hover {
-      color: ${({ theme }) => theme.colors.primary};
-      text-decoration-color: ${({ theme }) => theme.colors.primary};
-    }
-    :focus {
-      color: ${({ theme }) => theme.colors.primary};
-      text-decoration-color: ${({ theme }) => theme.colors.primary};
-    }
+    color: ${({ theme }) => theme.colors.primary};
+    text-decoration-color: ${({ theme }) => theme.colors.primary};
   }
 
   &.page {
+    text-decoration: none;
     color: ${({ theme }) => theme.colors.headlines};
     :hover {
       text-decoration: underline;
@@ -145,10 +143,10 @@ a {
   }
 
   &.current-page {
-    text-decoration: underline;
+    text-decoration: none;
     color: ${STYLES.colors.disabled};
-    text-decoration-color: ${({ theme }) => theme.colors.primary};
     cursor: auto;
+    pointer-events: none;
   }
 }
 
