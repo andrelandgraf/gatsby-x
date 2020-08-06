@@ -43,7 +43,9 @@ const Modal = styled.div`
 const Dialog = ({ children }) => (
   <>
     <Background />
-    <Modal className="box">{children}</Modal>
+    <Modal className="box" role="dialog">
+      {children}
+    </Modal>
   </>
 );
 Dialog.propTypes = {

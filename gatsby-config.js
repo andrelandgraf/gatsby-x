@@ -11,12 +11,17 @@ module.exports = {
   siteMetadata: {
     siteUrl,
     title: `GatsbyX`,
-    description: `Hello World. I <3 Gatsby! This is my Gatsby skeleton. There is a lot of tooling and pluggin' around Gatsby and I am tired of doing it from scratch for every new project.`,
+    description: `Hello World. I love Gatsby! This is my Gatsby skeleton. There is a lot of tooling and pluggin' around Gatsby and I am tired of doing it from scratch for every new project.`,
     author: `@andrelandgraf94`,
     image: '/images/Gatsby_Logo.png',
   },
   plugins: [
-    `gatsby-plugin-svgr`,
+    {
+      resolve: `gatsby-plugin-svgr`,
+      options: {
+        ref: true,
+      },
+    },
     `gatsby-plugin-styled-components`,
     `gatsby-image`,
     {

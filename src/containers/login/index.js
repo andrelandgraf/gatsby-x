@@ -158,31 +158,29 @@ const Login = () => {
           <input
             type="email"
             autoComplete="email"
+            aria-label="Your email address"
             placeholder="Your email address"
             value={email}
             onChange={handleEmailChange}
             pattern=".{3,}"
-            title="Please provide your email address"
+            title="Please provide your email address."
             required
           />
           {!forgotPassword && (
             <input
               type="password"
               autoComplete="current-password"
+              aria-label="Your password"
               placeholder="Your password"
               value={password}
               onChange={handlePasswordChange}
               pattern=".{1,}"
-              title="Please pick a password for your account"
+              title="Please type your password, so we can make sure it's actually you."
               required
             />
           )}
           {!forgotPassword && (
-            <a
-              href={forgotRef}
-              onClick={forgotPasswordClicked}
-              className="link"
-            >
+            <a href={forgotRef} onClick={forgotPasswordClicked}>
               Forgot your password?
             </a>
           )}

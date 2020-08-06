@@ -7,7 +7,7 @@ import { Grid, Stack, CustomLink } from '../components';
 const treats = [
   {
     name: 'React',
-    reasoning: 'My favorite frontend framework',
+    reasoning: 'My favorite frontend framework.',
     link: 'https://reactjs.org/',
   },
   {
@@ -25,7 +25,7 @@ const treats = [
   {
     name: 'Framer Motion',
     reasoning:
-      'Doing animaitons right is hard. Doing animations in React is easy. The only struggle that stays: how not to overdo it...',
+      'Doing animaitons right is hard. Doing animations with React components is cumbersome. Framer Motion brings animations into the component world. The only struggle that stays: how to not overdo it...',
     link: 'https://www.framer.com/motion/',
   },
   {
@@ -39,6 +39,11 @@ const treats = [
     reasoning:
       'Just started using Playroom but I already love it. Rapid JSX prototyping.',
     link: 'https://github.com/seek-oss/playroom',
+  },
+  {
+    name: 'MDX',
+    reasoning: `Changelog, README, Documentation, Privacy, Legal: some pages just need to be a wall of text. Formatting this in components is a pain. MDX let's you import components inside your .mdx files and enables markdown syntax. Now you can write Gatsby pages in .mdx files!`,
+    link: 'https://mdxjs.com/',
   },
   {
     name: 'LogRocket',
@@ -63,6 +68,18 @@ const treats = [
     reasoning:
       'My favorite tech podcast. Can and should be considered as part of my tech stack.',
     link: 'https://syntax.fm/',
+  },
+  {
+    name: 'Figma',
+    reasoning:
+      'The logo for GatsbyX was made with Figma! Figma is a cloud-based design application. I use it to create svgs and simple first mockups.',
+    link: 'https://figma.com/',
+  },
+  {
+    name: 'a11y',
+    reasoning:
+      'Web accessibility as a design choice and part of the design system.',
+    link: 'https://reactjs.org/docs/accessibility.html',
   },
   {
     name: 'axios',
@@ -105,8 +122,8 @@ const IndexPage = () => (
       </Stack>
       <p>Welcome to this demo website.</p>
       <p>
-        This page is my personal playground for design ideas and also my Gatsby
-        skeleton.
+        This project is my personal playground for design ideas and also my
+        Gatsby skeleton application.
       </p>
       <Stack margin="40px 0 0 0">
         <Stack margin="20px">

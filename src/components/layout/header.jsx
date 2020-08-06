@@ -1,4 +1,4 @@
-import React, { useContext, useCallback, useMemo } from 'react';
+import React, { useContext, useCallback, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { ThemeContext } from 'styled-components';
 import { motion } from 'framer-motion';
@@ -99,6 +99,7 @@ const pages = [
 const Header = ({ siteTitle }) => {
   const { themeKeys, theme: key, switchTheme } = useContext(CustomThemeContext);
   const theme = useContext(ThemeContext);
+  const toggleRef = useRef();
 
   const toggle = useCallback(() => {
     if (key === themeKeys.light) {
@@ -106,6 +107,8 @@ const Header = ({ siteTitle }) => {
     } else if (key === themeKeys.dark) {
       switchTheme(themeKeys.light);
     }
+    // a11y: we do this to ensure the toggle stays in focus after we switched out the svg
+    setTimeout(() => toggleRef.current.focus());
   }, [themeKeys, key, switchTheme]);
 
   const mainNav = useMemo(
@@ -149,7 +152,13 @@ const Header = ({ siteTitle }) => {
           </li>
         </QuickNavRight>
         <Theming>
-          <CustomButton id="toggle-theme" onClick={toggle}>
+          <CustomButton
+            id="toggle-theme"
+            onClick={toggle}
+            label="Toggle theme"
+            title={`Switch to ${key} mode.`}
+            ref={toggleRef}
+          >
             {key === themeKeys.light ? <Night /> : <Day />}
           </CustomButton>
         </Theming>

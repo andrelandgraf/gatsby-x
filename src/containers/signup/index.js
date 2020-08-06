@@ -129,35 +129,41 @@ const Signup = () => {
           <input
             type="text"
             autoComplete="given-name"
+            aria-label="Given name"
             placeholder="Given name"
             size="40"
             value={givenName}
             onChange={handleGivenNameChange}
+            title="Please provide your given name or any nickname you would like to pick for our services."
             required
           />
           <input
             type="text"
             autoComplete="family-name"
+            aria-label="Family name"
             placeholder="Family name"
             size="40"
             value={familyName}
             onChange={handleFamilyNameChange}
+            title="Please provide your family name or any nickname you would like to pick for our services."
             required
           />
           <input
             type="email"
             autoComplete="email"
+            aria-label="Email address"
             placeholder="Email address"
             size="40"
             value={email}
             onChange={handleEmailChange}
             pattern=".{3,}"
-            title="Your email address is required."
+            title="Please provide your email address."
             required
           />
           <input
             type="password"
             autoComplete="new-password"
+            aria-label="Your password"
             placeholder="Your password"
             size="40"
             value={password}
@@ -169,12 +175,13 @@ const Signup = () => {
           <input
             type="password"
             autoComplete="new-password"
+            aria-label="Repeat password"
             placeholder="Repeat password"
             size="40"
             value={repeatPw}
             onChange={handleRepeatPwChange}
             pattern=".{1,}"
-            title="Your passwords don't match."
+            title="Please repeat your password to ensure it is correct."
             required
           />
           <Checkbox

@@ -121,7 +121,7 @@ a {
   }
 
   :focus {
-    outline: 0;
+    outline-color: ${({ theme }) => theme.outline.color};
     color: ${({ theme }) => theme.colors.primary};
     text-decoration-color: ${({ theme }) => theme.colors.primary};
   }
@@ -136,6 +136,7 @@ a {
     }
 
     :focus {
+      outline: 0;
       text-decoration: underline;
       color: ${({ theme }) => theme.colors.primary};
       text-decoration-color: ${({ theme }) => theme.colors.primary};
@@ -156,7 +157,7 @@ button {
       cursor: pointer;
   }
   &:focus {
-    outline: 0;
+    outline-color: ${({ theme }) => theme.outline.color};
   }
 }
 
@@ -166,7 +167,7 @@ input[type='submit'] {
       cursor: pointer;
   }
   &:focus {
-    outline: 0;
+    outline-color: ${({ theme }) => theme.outline.color};
   }
 }
 
@@ -184,6 +185,7 @@ input:not([type='checkbox']):not([type='submit']) {
   transition:border-color .25s ease, box-shadow .25s ease;
   &:focus {
     outline: 0;
+    background-color: ${({ theme }) => theme.colors.boxBackground}
   }
   margin: 1vh 0;
 }
@@ -196,13 +198,19 @@ input:not([type='checkbox']):not([type='submit']) {
     STYLES.hexToRgba(theme.colors.font, 0.15)};
 }
 
-.not-displayed {
-  display: none !important;
+.hide {
+  display: none;
 }
 
-.not-displayed-on-mobile {
+.hide-on-mobile {
   @media screen and (max-width: ${STYLES.breakpoints.phoneWidth}px) {
-      display: none !important;
+      display: none;
+  }
+}
+
+.hide-on-desktop {
+  @media screen and (min-width: ${STYLES.breakpoints.phoneWidth}px) {
+      display: none;
   }
 }
 
@@ -211,6 +219,9 @@ input:not([type='checkbox']):not([type='submit']) {
 
   &:hover {
       cursor: pointer;
+  }
+  &:focus {
+    outline-color: ${({ theme }) => theme.outline.color};
   }
 }
 `;

@@ -9,7 +9,7 @@ import { ReactComponent as Success } from '../../assets/svgs/success.svg';
 import { ReactComponent as Cancel } from '../../assets/svgs/cancel.svg';
 
 import { MESSAGE_TYPES, STYLES } from '../../enums';
-import IconButton from '../clickables/customButton';
+import CustomButton from '../clickables/customButton';
 
 const MessageBox = styled(motion.div)`
   display: flex;
@@ -109,19 +109,21 @@ const Message = ({ type, message, onResolve, classes }) => {
         visible: { opacity: 1, transition: { duration: 2 } },
         hidden: { opacity: 0, transition: { duration: 0.6 } },
       }}
+      role="alertdialog"
     >
       {gamifyIcon}
       <MessageText>
         <h4>{type}</h4>
         <span>{message}</span>
       </MessageText>
-      <IconButton
+      <CustomButton
         id="dismiss-message"
-        alt="dismiss message"
+        label="Dismiss message"
+        title="Mark message as read and remove it from the page."
         onClick={onResolve}
       >
         <Cancel />
-      </IconButton>
+      </CustomButton>
     </MessageBox>
   );
 };

@@ -1,30 +1,40 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 
-const CustomButton = ({ id, classes, onClick, children }) => (
-  <>
-    {React.cloneElement(children, {
-      className: `clickable ${classes}`,
-      id,
-      tabIndex: 0,
-      role: 'button',
-      onClick,
-      onKeyUp: event => {
-        if (event.keyCode === 13) {
-          event.preventDefault();
-          // Trigger the button element with a click
-          document.getElementById(id).click();
-        }
-      },
-    })}
-  </>
+const CustomButton = React.forwardRef(
+  ({ classes, label, title, onClick, children }, ref) => (
+    <>
+      {React.cloneElement(children, {
+        ref,
+        className: `clickable ${classes}`,
+        tabIndex: 0,
+        role: 'button',
+        'aria-label': label,
+        titel: title,
+        onClick,
+        onKeyUp: useCallback(
+          event => {
+            if (event.keyCode === 13) {
+              event.preventDefault();
+              // Trigger the button element with a click
+              onClick();
+            }
+          },
+          [onClick]
+        ),
+      })}
+    </>
+  )
 );
 
+CustomButton.displayName = 'CustomButton';
+
 CustomButton.propTypes = {
-  id: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   classes: PropTypes.string,
   onClick: PropTypes.func,
-  children: PropTypes.node.isRequired,
 };
 
 CustomButton.defaultProps = {

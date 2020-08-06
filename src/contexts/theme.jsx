@@ -20,6 +20,9 @@ const themes = {
       primary: STYLES.colors.indigo,
       secondary: STYLES.colors.mattIndigo,
     },
+    outline: {
+      color: STYLES.colors.mattIndigo,
+    },
   },
   light: {
     colors: {
@@ -30,6 +33,9 @@ const themes = {
       font: STYLES.colors.fontGrey,
       primary: STYLES.colors.lightBlue,
       secondary: STYLES.colors.mattLightBlue,
+    },
+    outline: {
+      color: STYLES.colors.mattLightBlue,
     },
   },
 };
