@@ -16,7 +16,6 @@ module.exports = {
     image: '/images/Gatsby_Logo.png',
   },
   plugins: [
-    `gatsby-plugin-mdx`,
     `gatsby-plugin-svgr`,
     `gatsby-plugin-styled-components`,
     `gatsby-image`,
@@ -25,6 +24,12 @@ module.exports = {
       options: {
         name: `images`,
         path: `${__dirname}/src/assets/imgs`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        extensions: [`.mdx`, `.md`],
       },
     },
     `gatsby-transformer-sharp`,
