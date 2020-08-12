@@ -5,13 +5,14 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React, { useContext } from 'react';
+import React, { useContext, useCallback, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useStaticQuery, graphql } from 'gatsby';
 import styled, { ThemeContext } from 'styled-components';
 import { motion } from 'framer-motion';
 
 import { STYLES } from '../../enums';
+import { DialogProvider } from '../../contexts/dialog';
 import GlobalStyle from './globalStyle';
 import Header from './header';
 import Footer from './footer';
@@ -36,6 +37,7 @@ const Content = styled.main`
 
 const Layout = ({ children }) => {
   const theme = useContext(ThemeContext);
+  const ref = useRef();
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -46,17 +48,30 @@ const Layout = ({ children }) => {
     }
   `);
 
+  // important for supporting a11y on modal dialogs
+  const setPageHidden = useCallback(
+    (isHidden = false) => {
+      if (ref.current) {
+        ref.current.setAttribute('aria-hidden', `${isHidden}`);
+      }
+    },
+    [ref]
+  );
+
   return (
-    <Page
-      animate={{ backgroundColor: theme.colors.background }}
-      transition={{ duration: 0.85 }}
-      initial={false}
-    >
+    <DialogProvider setPageHidden={setPageHidden}>
       <GlobalStyle />
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <Content>{children}</Content>
-      <Footer />
-    </Page>
+      <Page
+        animate={{ backgroundColor: theme.colors.background }}
+        transition={{ duration: 0.85 }}
+        initial={false}
+        ref={ref}
+      >
+        <Header siteTitle={data.site.siteMetadata.title} />
+        <Content>{children}</Content>
+        <Footer />
+      </Page>
+    </DialogProvider>
   );
 };
 

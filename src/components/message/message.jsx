@@ -117,7 +117,6 @@ const Message = ({ type, message, onResolve, classes }) => {
         <span>{message}</span>
       </MessageText>
       <CustomButton
-        id="dismiss-message"
         label="Dismiss message"
         title="Mark message as read and remove it from the page."
         onClick={onResolve}

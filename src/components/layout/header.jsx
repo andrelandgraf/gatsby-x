@@ -37,7 +37,7 @@ const NavigationMobile = styled.nav`
   display: flex;
   flex-direction: row;
   align-items: center;
-  flex-wrap: wrap;
+  overflow-x: auto;
 
   @media screen and (min-width: ${STYLES.breakpoints.phoneWidth}px) {
     display: none;
@@ -153,7 +153,6 @@ const Header = ({ siteTitle }) => {
         </QuickNavRight>
         <Theming>
           <CustomButton
-            id="toggle-theme"
             onClick={toggle}
             label="Toggle theme"
             title={`Switch to ${key} mode.`}

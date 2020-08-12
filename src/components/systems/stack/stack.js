@@ -12,9 +12,11 @@ const spring = {
 };
 
 const Div = styled.div`
-  ${({ collapse }) => (collapse ? '' : 'width: 100%;')}
+  ${({ collapseX }) => (collapseX ? '' : 'width: 100%;')}
+  ${({ expandY }) => (expandY ? 'min-height: 100%;' : '')}
   display: grid;
   grid-template-columns: minmax(0, 1fr);
+  grid-auto-rows: minmax(min-content, max-content);
   row-gap: ${({ gap }) => gap};
   justify-items: ${({ centered }) => (centered ? 'center' : 'start')};
   align-items: ${({ centered }) => (centered ? 'center' : 'start')};
@@ -28,11 +30,20 @@ const Div = styled.div`
 
 const MotionedDiv = motion.custom(Div);
 
-const Stack = ({ children, collapse, centered, gap, margin, useMotion }) => (
+const Stack = ({
+  children,
+  collapseX,
+  expandY,
+  centered,
+  gap,
+  margin,
+  useMotion,
+}) => (
   <>
     {useMotion ? (
       <MotionedDiv
-        collapse={collapse}
+        collapseX={collapseX}
+        expandY={expandY}
         gap={gap}
         margin={margin}
         centered={centered}
@@ -42,7 +53,7 @@ const Stack = ({ children, collapse, centered, gap, margin, useMotion }) => (
         {children}
       </MotionedDiv>
     ) : (
-      <Div collapse={collapse} gap={gap} margin={margin} centered={centered}>
+      <Div collapseX={collapseX} gap={gap} margin={margin} centered={centered}>
         {children}
       </Div>
     )}
@@ -54,7 +65,8 @@ Stack.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
-  collapse: PropTypes.bool,
+  collapseX: PropTypes.bool,
+  expandY: PropTypes.bool,
   centered: PropTypes.bool,
   gap: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   margin: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -62,7 +74,8 @@ Stack.propTypes = {
 };
 
 Stack.defaultProps = {
-  collapse: false,
+  collapseX: false,
+  expandY: false,
   centered: true,
   gap: 0,
   margin: 0,
