@@ -1,5 +1,13 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useRef,
+  useContext,
+} from 'react';
 import PropTypes from 'prop-types';
+
+import { NavigationContext } from './navigation';
 
 const DialogContext = React.createContext({
   isOpen: false,
@@ -10,10 +18,12 @@ const DialogContext = React.createContext({
 const DialogProvider = ({ setPageHidden, children }) => {
   const [showDialog, setShowDialog] = useState(false);
   const [dialog, setDialog] = useState(null);
+  const { closeMenu } = useContext(NavigationContext);
   const focusRef = useRef();
 
   const openDialog = useCallback(
     newDialog => {
+      closeMenu();
       setPageHidden(true);
       setDialog(newDialog);
       setShowDialog(true);
@@ -21,7 +31,7 @@ const DialogProvider = ({ setPageHidden, children }) => {
         focusRef.current = document.activeElement;
       }
     },
-    [setPageHidden]
+    [closeMenu, setPageHidden]
   );
 
   const closeDialog = useCallback(() => {
@@ -49,8 +59,6 @@ const DialogProvider = ({ setPageHidden, children }) => {
     openDialog,
     closeDialog,
   };
-
-  console.log('context', context);
 
   return (
     <DialogContext.Provider value={context}>

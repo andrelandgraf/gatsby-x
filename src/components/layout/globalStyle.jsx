@@ -97,12 +97,12 @@ code {
 
 ul {
   margin: 0;
+  list-style-position: inside;
 }
 
 li {
   margin: 0;
   line-height: 1.8;
-  padding: 2px;
   font-size: ${STYLES.fontSizes.s};
   max-width: 800px;
 }
@@ -193,9 +193,13 @@ input:not([type='checkbox']):not([type='submit']) {
 .box {
   background-color: ${({ theme }) => theme.colors.background};
   border-radius: 4px;
-  border: 1px solid #d9d9d9;
+  border: 1px solid ${STYLES.colors.border};
   box-shadow: 0 2px 8px ${({ theme }) =>
     STYLES.hexToRgba(theme.colors.font, 0.15)};
+}
+
+.no-scroll {
+  overflow: hidden;
 }
 
 .hide {

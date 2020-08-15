@@ -11,8 +11,8 @@ import { useStaticQuery, graphql } from 'gatsby';
 import styled, { ThemeContext } from 'styled-components';
 import { motion } from 'framer-motion';
 
-import { STYLES } from '../../enums';
 import { DialogProvider } from '../../contexts/dialog';
+import { NavigationProvider } from '../../contexts/navigation';
 import GlobalStyle from './globalStyle';
 import Header from './header';
 import Footer from './footer';
@@ -30,9 +30,6 @@ const Content = styled.main`
   overflow-x: hidden;
   margin: 20vh 5vw 15vh 5vw;
   min-height: 70vh;
-  @media screen and (max-width: ${STYLES.breakpoints.phoneWidth}px) {
-    margin-top: 30vh;
-  }
 `;
 
 const Layout = ({ children }) => {
@@ -53,25 +50,28 @@ const Layout = ({ children }) => {
     (isHidden = false) => {
       if (ref.current) {
         ref.current.setAttribute('aria-hidden', `${isHidden}`);
+        document.body.classList.toggle('no-scroll', !isHidden);
       }
     },
     [ref]
   );
 
   return (
-    <DialogProvider setPageHidden={setPageHidden}>
-      <GlobalStyle />
-      <Page
-        animate={{ backgroundColor: theme.colors.background }}
-        transition={{ duration: 0.85 }}
-        initial={false}
-        ref={ref}
-      >
-        <Header siteTitle={data.site.siteMetadata.title} />
-        <Content>{children}</Content>
-        <Footer />
-      </Page>
-    </DialogProvider>
+    <NavigationProvider setPageHidden={setPageHidden}>
+      <DialogProvider setPageHidden={setPageHidden}>
+        <GlobalStyle />
+        <Page
+          animate={{ backgroundColor: theme.colors.background }}
+          transition={{ duration: 0.85 }}
+          initial={false}
+          ref={ref}
+        >
+          <Header siteTitle={data.site.siteMetadata.title} />
+          <Content>{children}</Content>
+          <Footer />
+        </Page>
+      </DialogProvider>
+    </NavigationProvider>
   );
 };
 

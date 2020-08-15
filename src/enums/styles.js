@@ -7,7 +7,8 @@ export default Object.freeze({
   },
   colors: {
     white: '#fff',
-    mattWhite: '#fcf7f8',
+    mattWhite: '#fcfcfc',
+    mattGreyWhite: '#e5e4e2',
     indigo: '#304FFE',
     mattIndigo: '#3d5afe',
     lightBlue: '#00b0ff',
@@ -30,6 +31,7 @@ export default Object.freeze({
     disabled: '#757070',
     fontGrey: '#404040',
     fontWhite: '#f1edfd',
+    border: '#d9d9d9',
   },
   fontSizes: {
     xs: '14px',

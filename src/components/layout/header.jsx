@@ -6,41 +6,46 @@ import { motion } from 'framer-motion';
 import { ReactComponent as Logo } from '../../assets/svgs/gatsbyx.svg';
 import { ReactComponent as Night } from '../../assets/svgs/night.svg';
 import { ReactComponent as Day } from '../../assets/svgs/day.svg';
+import { ReactComponent as Menu } from '../../assets/svgs/menu.svg';
 
 import { STYLES } from '../../enums';
 import { CustomThemeContext } from '../../contexts/theme';
+import { NavigationContext } from '../../contexts/navigation';
 import CustomButton from '../clickables/customButton';
 import CustomLink from '../clickables/customLink';
+import NavMenu from './navigation';
 
 const FixedHeader = styled(motion.header)`
   top: 0;
   left: 0;
+  right: 0;
   position: fixed;
   width: 100vw;
   z-index: 10;
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.box};
+  overflow-x: hidden;
+  overflow-y: auto;
 
   ul {
     padding-inline-start: 0;
   }
+
+  @media screen and (max-width: ${STYLES.breakpoints.phoneWidth}px) {
+    ${({ isExpanded }) => (isExpanded ? 'bottom: 0;' : '')}
+  }
 `;
 
-const Navigation = styled.nav`
-  margin: 3vh 0 1vh 0;
+const NavBar = styled.nav`
+  margin: 3vh 5vw 1vh 5vw;
   display: flex;
   flex-direction: row;
   align-items: center;
 `;
 
-const NavigationMobile = styled.nav`
-  padding: 0 0 1vh 5vw;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  overflow-x: auto;
-
-  @media screen and (min-width: ${STYLES.breakpoints.phoneWidth}px) {
-    display: none;
+const NavMenuToggle = styled.div`
+  justify-self: flex-start;
+  svg {
+    width: 28px;
   }
 `;
 
@@ -62,13 +67,7 @@ const QuickNavRight = styled.ul`
   }
 `;
 
-const HideOnMobile = styled.div`
-  @media screen and (max-width: ${STYLES.breakpoints.phoneWidth}px) {
-    display: none;
-  }
-`;
-
-const MainNav = styled.ul`
+const QuickLinks = styled.ul`
   display: flex;
   list-style-type: none;
 
@@ -79,12 +78,13 @@ const MainNav = styled.ul`
 
 const Theming = styled.div`
   justify-self: flex-start;
-  margin: 0 5vw 0 5vw;
+  margin: 0 0 0 5vw;
   svg {
     width: 28px;
   }
 `;
 
+// pages for quick access on desktop
 const pages = [
   {
     name: 'README',
@@ -97,23 +97,24 @@ const pages = [
 ];
 
 const Header = ({ siteTitle }) => {
-  const { themeKeys, theme: key, switchTheme } = useContext(CustomThemeContext);
   const theme = useContext(ThemeContext);
-  const toggleRef = useRef();
+  const { themeKeys, theme: key, switchTheme } = useContext(CustomThemeContext);
+  const { toggleMenu, isOpen } = useContext(NavigationContext);
+  const toggleThemeRef = useRef();
 
-  const toggle = useCallback(() => {
+  const toggleTheme = useCallback(() => {
     if (key === themeKeys.light) {
       switchTheme(themeKeys.dark);
     } else if (key === themeKeys.dark) {
       switchTheme(themeKeys.light);
     }
-    // a11y: we do this to ensure the toggle stays in focus after we switched out the svg
-    setTimeout(() => toggleRef.current.focus());
+    // a11y: we do this to ensure the toggleTheme stays in focus after we switched out the svg
+    setTimeout(() => toggleThemeRef.current.focus());
   }, [themeKeys, key, switchTheme]);
 
-  const mainNav = useMemo(
+  const quickLinks = useMemo(
     () => (
-      <MainNav>
+      <QuickLinks className="hide-on-mobile">
         {pages.map(page => (
           <li key={page.name}>
             <CustomLink link={page.link} isPage>
@@ -121,26 +122,36 @@ const Header = ({ siteTitle }) => {
             </CustomLink>
           </li>
         ))}
-      </MainNav>
+      </QuickLinks>
     ),
     []
   );
 
   return (
     <FixedHeader
+      isExpanded={isOpen}
       animate={{ backgroundColor: theme.colors.background }}
       transition={{ duration: 0.85 }}
       initial={false}
     >
-      <Navigation>
+      <NavBar>
+        <NavMenuToggle>
+          <CustomButton
+            onClick={toggleMenu}
+            label="Toggle navigation menu"
+            title={`${isOpen ? 'Close' : 'Open'} navigation menu`}
+          >
+            <Menu />
+          </CustomButton>
+        </NavMenuToggle>
         <Branding>
           <CustomLink link="/" isPage>
             <Logo />
           </CustomLink>
         </Branding>
-        <HideOnMobile>{mainNav}</HideOnMobile>
+        {quickLinks}
         <QuickNavRight>
-          <li>
+          <li className="hide-on-mobile">
             <CustomLink link="/signup" isPage>
               Signup
             </CustomLink>
@@ -151,18 +162,18 @@ const Header = ({ siteTitle }) => {
             </CustomLink>
           </li>
         </QuickNavRight>
-        <Theming>
+        <Theming className="hide-on-mobile">
           <CustomButton
-            onClick={toggle}
+            onClick={toggleTheme}
             label="Toggle theme"
             title={`Switch to ${key} mode.`}
-            ref={toggleRef}
+            ref={toggleThemeRef}
           >
             {key === themeKeys.light ? <Night /> : <Day />}
           </CustomButton>
         </Theming>
-      </Navigation>
-      <NavigationMobile>{mainNav}</NavigationMobile>
+      </NavBar>
+      {isOpen && <NavMenu />}
     </FixedHeader>
   );
 };

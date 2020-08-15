@@ -55,7 +55,8 @@ const Login = () => {
     setForgotPassword(true);
     setMessage('');
     setPassword('');
-  }, [setMessage]);
+    setStatus(LOADING_STATUS.isIdle);
+  }, [setMessage, setStatus]);
 
   const handleLogin = useCallback(async () => {
     if (email.length < 2 || !password) {
@@ -142,6 +143,7 @@ const Login = () => {
               <h1>Forgot password</h1>
             </Stack>
             <h2>Please check your mailbox</h2>
+            <CustomLink link="/login">Back to login</CustomLink>
           </Stack>
         </Centered>
       </>

@@ -36,7 +36,7 @@ const Modal = styled.div`
   }
   @media screen and (max-width: ${STYLES.breakpoints.phoneWidth}px) {
     top: 8vh;
-    width: 90vw;
+    width: 98vw;
     height: 85vh;
   }
 `;
