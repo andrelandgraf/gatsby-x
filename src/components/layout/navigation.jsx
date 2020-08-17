@@ -51,9 +51,6 @@ const pages = [
     link: '/',
   },
   {
-    title: 'Documentation',
-  },
-  {
     name: 'README',
     link: '/readme',
   },
