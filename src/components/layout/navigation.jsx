@@ -7,6 +7,7 @@ import { ReactComponent as Day } from '../../assets/svgs/day.svg';
 
 import { STYLES } from '../../enums';
 import { CustomThemeContext } from '../../contexts/theme';
+import { UserContext } from '../../contexts/user';
 import useIsLoggedIn from '../../hooks/useIsLoggedIn';
 import Stack from '../systems/stack';
 import CustomLink from '../clickables/customLink';
@@ -75,10 +76,11 @@ const pages = [
 
 const NavMenu = () => {
   const isLoggedIn = useIsLoggedIn();
+  const { handleLogout } = useContext(UserContext);
   const { themeKeys, theme: key, switchTheme } = useContext(CustomThemeContext);
   const toggleRef = useRef();
 
-  const toggle = useCallback(() => {
+  const toggleTheme = useCallback(() => {
     if (key === themeKeys.light) {
       switchTheme(themeKeys.dark);
     } else if (key === themeKeys.dark) {
@@ -92,7 +94,7 @@ const NavMenu = () => {
     () => [
       <CustomButton
         key="Toggle theme"
-        onClick={toggle}
+        onClick={toggleTheme}
         label="Toggle theme"
         title={`Switch to ${key} mode.`}
         ref={toggleRef}
@@ -103,12 +105,12 @@ const NavMenu = () => {
         </Action>
       </CustomButton>,
     ],
-    [key, themeKeys.light, toggle]
+    [key, themeKeys.light, toggleTheme]
   );
 
   return (
     <MotionedMenu
-      initial="visible"
+      initial="hidden"
       animate="visible"
       exit="hidden"
       variants={{
@@ -137,7 +139,28 @@ const NavMenu = () => {
         {isLoggedIn && (
           <>
             <h1>Profile</h1>
-            <Section></Section>
+            <Section>
+              <li className={isLoggedIn ? 'hide' : ''}>
+                <CustomLink link="/signup" isPage>
+                  Signup
+                </CustomLink>
+              </li>
+              <li className={isLoggedIn ? 'hide' : ''}>
+                <CustomLink link="/login" isPage>
+                  Login
+                </CustomLink>
+              </li>
+              <CustomButton
+                key="Logout"
+                onClick={handleLogout}
+                label="Logout"
+                title="Logout"
+              >
+                <Action>
+                  <span>Logout</span>
+                </Action>
+              </CustomButton>
+            </Section>
           </>
         )}
         <h1>Accessibility</h1>

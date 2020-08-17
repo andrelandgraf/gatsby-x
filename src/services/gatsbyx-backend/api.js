@@ -2,6 +2,8 @@ import { ENV } from '../../enums';
 
 const { apiUrl } = ENV;
 
+console.log('basepath', apiUrl);
+
 const API = {
   TOKEN: `${apiUrl}/auth/token`,
   REGISTER: `${apiUrl}/users`,

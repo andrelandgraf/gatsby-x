@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { STYLES } from '../../enums';
+import Spinner, { spinnerType } from '../spinner/spinner';
 
 const StyledButton = styled.button`
   line-height: 1.499;
@@ -62,7 +63,7 @@ const StyledButton = styled.button`
 `;
 
 const Button = React.forwardRef(
-  ({ classes, label, onClick, primary, disabled, submit }, ref) => (
+  ({ classes, label, onClick, primary, disabled, isLoading, submit }, ref) => (
     <StyledButton
       ref={ref}
       className={`${primary || submit ? 'primary' : ''} ${
@@ -70,9 +71,9 @@ const Button = React.forwardRef(
       } ${classes}`}
       type={submit ? 'submit' : 'button'}
       onClick={onClick}
-      disabled={disabled}
+      disabled={disabled || isLoading}
     >
-      {label}
+      {isLoading ? <Spinner type={spinnerType.tiny} message={label} /> : label}
     </StyledButton>
   )
 );
@@ -85,6 +86,7 @@ Button.propTypes = {
   onClick: PropTypes.func,
   primary: PropTypes.bool,
   disabled: PropTypes.bool,
+  isLoading: PropTypes.bool,
   submit: PropTypes.bool,
 };
 
@@ -94,6 +96,7 @@ Button.defaultProps = {
   onClick: undefined,
   primary: false,
   disabled: false,
+  isLoading: false,
   submit: false,
 };
 

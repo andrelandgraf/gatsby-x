@@ -11,6 +11,7 @@ import { ReactComponent as Menu } from '../../assets/svgs/menu.svg';
 import { STYLES } from '../../enums';
 import { CustomThemeContext } from '../../contexts/theme';
 import { NavigationContext } from '../../contexts/navigation';
+import useIsLoggedIn from '../../hooks/useIsLoggedIn';
 import CustomButton from '../clickables/customButton';
 import CustomLink from '../clickables/customLink';
 import NavMenu from './navigation';
@@ -25,6 +26,10 @@ const FixedHeader = styled(motion.header)`
   background-color: ${({ theme }) => theme.colors.box};
   overflow-x: hidden;
   overflow-y: auto;
+  border-bottom: ${({ theme }) =>
+    `${theme.border.width} ${theme.border.style} ${theme.border.color}`};
+  box-shadow: 0 2px 8px
+    ${({ theme }) => STYLES.hexToRgba(theme.colors.font, 0.15)};
 
   ul {
     padding-inline-start: 0;
@@ -97,6 +102,7 @@ const pages = [
 ];
 
 const Header = ({ siteTitle }) => {
+  const isLoggedIn = useIsLoggedIn();
   const theme = useContext(ThemeContext);
   const { themeKeys, theme: key, switchTheme } = useContext(CustomThemeContext);
   const { toggleMenu, isOpen } = useContext(NavigationContext);
@@ -130,7 +136,10 @@ const Header = ({ siteTitle }) => {
   return (
     <FixedHeader
       isExpanded={isOpen}
-      animate={{ backgroundColor: theme.colors.background }}
+      animate={{
+        backgroundColor: theme.colors.background,
+        borderBottom: theme.border.color,
+      }}
       transition={{ duration: 0.85 }}
       initial={false}
     >
@@ -151,16 +160,20 @@ const Header = ({ siteTitle }) => {
         </Branding>
         {quickLinks}
         <QuickNavRight>
-          <li className="hide-on-mobile">
-            <CustomLink link="/signup" isPage>
-              Signup
-            </CustomLink>
-          </li>
-          <li>
-            <CustomLink link="/login" isPage>
-              Login
-            </CustomLink>
-          </li>
+          {!isLoggedIn && (
+            <>
+              <li className="hide-on-mobile">
+                <CustomLink link="/signup" isPage>
+                  Signup
+                </CustomLink>
+              </li>
+              <li>
+                <CustomLink link="/login" isPage>
+                  Login
+                </CustomLink>
+              </li>
+            </>
+          )}
         </QuickNavRight>
         <Theming className="hide-on-mobile">
           <CustomButton

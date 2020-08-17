@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import LogRocket from 'logrocket';
 
@@ -15,12 +15,18 @@ const UserContext = React.createContext({
   status: LOADING_STATUS.isIdle,
   setStatus: () => {},
   isLoading: false,
+  handleLogout: () => {},
 });
 
 function UserProvider({ children }) {
   const [user, setUser] = useState();
   const [startedLogrocket, setStartedLogrocket] = useState(false);
   const { status, setStatus, isLoading } = useStatus();
+
+  const handleLogout = useCallback(() => {
+    logUserOut();
+    setUser(undefined);
+  }, []);
 
   // once we are on the browser, run this code
   useEffect(() => {
@@ -58,6 +64,7 @@ function UserProvider({ children }) {
     status,
     setStatus,
     isLoading,
+    handleLogout,
   };
 
   return (

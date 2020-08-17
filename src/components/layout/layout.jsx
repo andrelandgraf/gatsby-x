@@ -47,10 +47,14 @@ const Layout = ({ children }) => {
 
   // important for supporting a11y on modal dialogs
   const setPageHidden = useCallback(
-    (isHidden = false) => {
+    isHidden => {
       if (ref.current) {
         ref.current.setAttribute('aria-hidden', `${isHidden}`);
-        document.body.classList.toggle('no-scroll', !isHidden);
+        if (isHidden) {
+          document.body.classList.add('no-scroll');
+        } else {
+          document.body.classList.remove('no-scroll');
+        }
       }
     },
     [ref]

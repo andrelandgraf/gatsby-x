@@ -6,3 +6,4 @@ export { default as Checkbox } from './clickables/checkbox';
 export { default as Dialog } from './dialog/dialog';
 export { default as Message } from './message/message';
 export { default as SEO } from './layout/seo';
+export { default as Spinner } from './spinner/spinner';

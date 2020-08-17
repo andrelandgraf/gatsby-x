@@ -23,6 +23,11 @@ const themes = {
     outline: {
       color: STYLES.colors.mattIndigo,
     },
+    border: {
+      width: '1px',
+      style: 'solid',
+      color: STYLES.colors.borderDark,
+    },
   },
   light: {
     colors: {
@@ -36,6 +41,11 @@ const themes = {
     },
     outline: {
       color: STYLES.colors.mattLightBlue,
+    },
+    border: {
+      width: '1px',
+      style: 'solid',
+      color: STYLES.colors.borderLight,
     },
   },
 };

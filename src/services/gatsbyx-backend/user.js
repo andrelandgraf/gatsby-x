@@ -43,18 +43,7 @@ export const logUserOut = () => removeAuthTokens();
 export const changePassword = password =>
   putRequest(API.CHANGEPW, { password });
 
-export const checkoutCourse = id => postRequest(`${API.CHECKOUT}${id}`, {});
-
-export const putVideoProgress = (id, index, progress) =>
-  putRequest(API.PROGRESS.replace('{id}', id).replace('{index}', index), {
-    progress,
-  });
-
-export const putPermissions = permissions =>
-  putRequest(API.PERMISSIONS, { permissions });
-
-export const resetVideoProgress = id =>
-  putRequest(API.RESET.replace('{id}', id), {});
+export const checkout = id => postRequest(`${API.CHECKOUT}${id}`, {});
 
 export const applyResetPw = email =>
   putRequest(API.TOKEN, { email }).catch(err => {

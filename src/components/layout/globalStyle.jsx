@@ -193,7 +193,8 @@ input:not([type='checkbox']):not([type='submit']) {
 .box {
   background-color: ${({ theme }) => theme.colors.background};
   border-radius: 4px;
-  border: 1px solid ${STYLES.colors.border};
+  border: ${({ theme }) =>
+    `${theme.border.width} ${theme.border.style} ${theme.border.color}`};
   box-shadow: 0 2px 8px ${({ theme }) =>
     STYLES.hexToRgba(theme.colors.font, 0.15)};
 }

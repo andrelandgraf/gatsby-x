@@ -14,18 +14,18 @@ const NavigationProvider = ({ setPageHidden, children }) => {
   console.log('isOpen', isOpen);
 
   const toggleMenu = useCallback(() => {
+    setPageHidden(!isOpen);
     setIsOpen(!isOpen);
-    setPageHidden(isOpen);
   }, [isOpen, setPageHidden]);
 
   const openMenu = useCallback(() => {
-    setIsOpen(true);
     setPageHidden(true);
+    setIsOpen(true);
   }, [setPageHidden]);
 
   const closeMenu = useCallback(() => {
-    setIsOpen(false);
     setPageHidden(false);
+    setIsOpen(false);
   }, [setPageHidden]);
 
   const context = {

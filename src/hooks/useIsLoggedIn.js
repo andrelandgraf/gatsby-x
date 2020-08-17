@@ -9,6 +9,8 @@ const useIsLoggedIn = () => {
   useEffect(() => {
     setIsLoggedIn(!!user);
   }, [user]);
+
+  console.log('isLoggedIn', user);
   return isLoggedIn;
 };
 

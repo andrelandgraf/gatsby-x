@@ -31,7 +31,8 @@ export default Object.freeze({
     disabled: '#757070',
     fontGrey: '#404040',
     fontWhite: '#f1edfd',
-    border: '#d9d9d9',
+    borderLight: '#d9d9d9',
+    borderDark: '#24292e',
   },
   fontSizes: {
     xs: '14px',
