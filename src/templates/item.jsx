@@ -68,7 +68,11 @@ const ItemPage = ({ data: { items: item } }) => {
       <Grid columns={2} gap="60px" centered>
         <Stack>
           <Stack gap="20px" collapseX centered={false}>
-            <h1>{item.title}</h1>
+            <h1>
+              {userHasItem
+                ? item.title
+                : `${item.title} for ${item.price / 100}$`}
+            </h1>
             <p>{item.description}</p>
             {buttons}
           </Stack>
