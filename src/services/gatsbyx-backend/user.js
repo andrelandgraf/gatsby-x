@@ -43,8 +43,6 @@ export const logUserOut = () => removeAuthTokens();
 export const changePassword = password =>
   putRequest(API.CHANGEPW, { password });
 
-export const checkout = id => postRequest(`${API.CHECKOUT}${id}`, {});
-
 export const applyResetPw = email =>
   putRequest(API.TOKEN, { email }).catch(err => {
     console.tag(TAG).debug('applyResetPw failed');

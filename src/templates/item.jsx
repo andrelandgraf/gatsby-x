@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import styled from 'styled-components';
 
-import { Stack, SEO, Button, Grid } from '../components';
+import { MessageProvider } from '../contexts/message';
+import { Stack, SEO, Checkout, Grid } from '../components';
 import Image from '../components/image/image';
 
 const ImageContainer = styled.div`
@@ -14,19 +15,19 @@ const ImageContainer = styled.div`
 const ItemPage = ({ data: { items: item } }) => {
   console.log(item);
   return (
-    <>
+    <MessageProvider>
       <SEO title={item.title} />
       <Grid columns={2} gap="60px" centered>
         <Stack gap="20px" centered={false}>
           <h1>{item.title}</h1>
           <p>{item.description}</p>
-          <Button label="Checkout" onClick={() => {}} primary />
+          <Checkout id={item.id} />
         </Stack>
         <ImageContainer>
           <Image src={item.imageUrl} alt={item.imageText} />
         </ImageContainer>
       </Grid>
-    </>
+    </MessageProvider>
   );
 };
 

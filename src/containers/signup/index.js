@@ -93,7 +93,6 @@ const Signup = () => {
           givenName,
           familyName,
         });
-        console.log('we are here', fetchedUser);
         setStatus(LOADING_STATUS.hasSucceeded);
         setUser(fetchedUser);
         navigate('/');

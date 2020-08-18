@@ -11,8 +11,6 @@ const NavigationContext = React.createContext({
 const NavigationProvider = ({ setPageHidden, children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log('isOpen', isOpen);
-
   const toggleMenu = useCallback(() => {
     setPageHidden(!isOpen);
     setIsOpen(!isOpen);

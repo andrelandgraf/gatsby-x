@@ -62,6 +62,10 @@ const pages = [
     title: 'Demos',
   },
   {
+    name: 'Checkout',
+    link: '/items/snowman',
+  },
+  {
     name: 'Dialog',
     link: '/dialog',
   },

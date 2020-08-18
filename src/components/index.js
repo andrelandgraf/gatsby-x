@@ -7,3 +7,4 @@ export { default as Dialog } from './dialog/dialog';
 export { default as Message } from './message/message';
 export { default as SEO } from './layout/seo';
 export { default as Spinner } from './spinner/spinner';
+export { default as Checkout } from './clickables/stripeCheckout';

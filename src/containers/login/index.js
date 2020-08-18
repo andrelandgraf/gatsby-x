@@ -2,6 +2,8 @@ import React, { useState, useCallback, useContext, useEffect } from 'react';
 import { navigate } from 'gatsby';
 import styled from 'styled-components';
 
+import { ReactComponent as Back } from '../../assets/svgs/back.svg';
+
 import { LOADING_STATUS, STYLES, MESSAGE_TYPES } from '../../enums';
 import { getOnLoginRedirect } from '../../utilities/storage';
 import { logUserIn, applyResetPw } from '../../services/gatsbyx-backend/user';
@@ -11,11 +13,28 @@ import { UserContext } from '../../contexts/user';
 import useStatus from '../../hooks/useStatus';
 import { Button, Stack, CustomLink } from '../../components';
 import SEO from '../../components/layout/seo';
+import CustomButton from '../../components/clickables/customButton';
 
 const Form = styled.form`
   width: 100%;
   @media screen and (min-width: ${STYLES.breakpoints.padWidth}px) {
     width: 400px;
+  }
+`;
+
+const Heading = styled.h1`
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+  grid-template-columns: auto auto;
+  h1 {
+    margin-right: auto;
+  }
+  svg {
+    display: inline;
+    width: 30px;
   }
 `;
 
@@ -28,7 +47,7 @@ const Centered = styled.div`
 `;
 
 const tag = 'Login';
-const forgotRef = '#forgot';
+const forgotHash = '#forgot';
 
 const Login = () => {
   const { hash } = useContext(BrowserContext);
@@ -40,7 +59,7 @@ const Login = () => {
   const [forgotPassword, setForgotPassword] = useState(false);
 
   useEffect(() => {
-    setForgotPassword(hash === forgotRef);
+    setForgotPassword(hash === forgotHash);
   }, [hash]);
 
   const handleEmailChange = useCallback(event => {
@@ -155,7 +174,20 @@ const Login = () => {
       <Form onSubmit={handleSubmit}>
         <Stack gap="20px">
           <Stack margin="0 0 10px 0">
-            <h1>{forgotPassword ? 'Forgot password' : 'Log in'}</h1>
+            {forgotPassword ? (
+              <Heading>
+                <CustomButton
+                  onClick={() => navigate('/login')}
+                  label="Back to Login"
+                  title="Back to Login"
+                >
+                  <Back />
+                </CustomButton>
+                <h1>Forgot password</h1>
+              </Heading>
+            ) : (
+              <h1>Log in</h1>
+            )}
           </Stack>
           <input
             type="email"
@@ -182,11 +214,10 @@ const Login = () => {
             />
           )}
           {!forgotPassword && (
-            <a href={forgotRef} onClick={forgotPasswordClicked}>
+            <a href={forgotHash} onClick={forgotPasswordClicked}>
               Forgot your password?
             </a>
           )}
-
           <Button
             label={forgotPassword ? 'Reset' : 'Login'}
             isLoading={isLoading}

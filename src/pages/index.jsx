@@ -58,6 +58,12 @@ const treats = [
     link: 'https://www.netlify.com/',
   },
   {
+    name: 'stripe',
+    reasoning:
+      'Stripe offers an amazing checkout API. They are awesome folks, the charges are highly competitive and their new website looks stunning!',
+    link: 'https://stripe.com/',
+  },
+  {
     name: 'No-Sweat™ Eslint and Prettier by Wes Bos',
     reasoning:
       'Builds on top of eslint-config-airbnb and manages pretter and eslint "under the hood".',

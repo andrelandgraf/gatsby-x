@@ -39,7 +39,7 @@ const StyledButton = styled.button`
   &:disabled {
     color: rgba(0, 0, 0, 0.25);
     background-color: #f5f5f5;
-    border-color: #d9d9d9;
+    border-color: ${({ theme }) => theme.border.color};
     pointer-events: none;
   }
   &:hover {

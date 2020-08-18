@@ -10,7 +10,6 @@ const useIsLoggedIn = () => {
     setIsLoggedIn(!!user);
   }, [user]);
 
-  console.log('isLoggedIn', user);
   return isLoggedIn;
 };
 
