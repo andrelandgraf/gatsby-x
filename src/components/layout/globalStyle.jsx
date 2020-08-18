@@ -119,7 +119,7 @@ li {
   max-width: 800px;
 }
 
-a {
+a:not(.a-as-button) {
   padding: 0;
   touch-action: manipulation;
   text-decoration: underline;
@@ -240,5 +240,9 @@ input:not([type='checkbox']):not([type='submit']) {
   &:focus {
     outline-color: ${({ theme }) => theme.outline.color};
   }
+}
+
+.a-as-button {
+  text-decoration: none;
 }
 `;

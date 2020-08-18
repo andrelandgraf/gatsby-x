@@ -58,7 +58,7 @@ const Spinner = ({ message, type }) => (
 );
 
 Spinner.propTypes = {
-  type: PropTypes.oneOf(Object.keys(spinnerType).map(key => spinnerType[key])),
+  type: PropTypes.oneOf(Object.values(spinnerType)),
   message: PropTypes.string,
 };
 

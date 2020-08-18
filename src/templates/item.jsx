@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import styled from 'styled-components';
 
+import { ReactComponent as ArrowDown } from '../assets/svgs/download.svg';
+
+import { STYLES, ENV } from '../enums';
 import { MessageProvider } from '../contexts/message';
-import { Stack, SEO, Checkout, Grid } from '../components';
+import useUserHasItem from '../hooks/useUserHasItem';
+import { Stack, SEO, Grid } from '../components';
+import CustomLink, { styles } from '../components/clickables/customLink';
+import Checkout from '../components/clickables/stripeCheckout';
 import Image from '../components/image/image';
 
 const ImageContainer = styled.div`
@@ -12,16 +18,60 @@ const ImageContainer = styled.div`
   max-width: 800px;
 `;
 
+const ButtonContainer = styled.div`
+  @media screen and (max-width: ${STYLES.breakpoints.phoneWidth}px) {
+    width: 100%;
+  }
+  a {
+    margin: 0 10px 20px 0;
+  }
+
+  svg {
+    width: 30px;
+  }
+`;
+
 const ItemPage = ({ data: { items: item } }) => {
-  console.log(item);
+  const userHasItem = useUserHasItem(item.id);
+
+  const buttons = useMemo(
+    () =>
+      userHasItem ? (
+        <ButtonContainer>
+          <CustomLink
+            link={`${ENV.mediaPath}/${item.link}.png`}
+            as={styles.asButton}
+            title={`Download the ${item.title} png file`}
+            download={`${item.title}.png`}
+          >
+            <ArrowDown />
+            Download png
+          </CustomLink>
+          <CustomLink
+            link={`${ENV.mediaPath}/${item.link}.svg`}
+            as={styles.asPrimaryButton}
+            title={`Download the ${item.title} svg file`}
+            download={`${item.title}.svg`}
+          >
+            <ArrowDown />
+            Download svg
+          </CustomLink>
+        </ButtonContainer>
+      ) : (
+        <Checkout id={item.id} />
+      ),
+    [item.id, item.link, item.title, userHasItem]
+  );
   return (
     <MessageProvider>
       <SEO title={item.title} />
       <Grid columns={2} gap="60px" centered>
-        <Stack gap="20px" centered={false}>
-          <h1>{item.title}</h1>
-          <p>{item.description}</p>
-          <Checkout id={item.id} />
+        <Stack>
+          <Stack gap="20px" collapseX centered={false}>
+            <h1>{item.title}</h1>
+            <p>{item.description}</p>
+            {buttons}
+          </Stack>
         </Stack>
         <ImageContainer>
           <Image src={item.imageUrl} alt={item.imageText} />

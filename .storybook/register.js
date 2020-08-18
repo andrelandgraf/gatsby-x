@@ -10,9 +10,9 @@ const ThemePanel = () => {
   return (
       <>
       {
-          Object.keys(themeKeys).map(key => (
-            <button onClick={() => emit('setTheme', { selected: themeKeys[key]})}>
-                {`make ${themeKeys[key]}`}
+          Object.values(themeKeys).map(theme => (
+            <button onClick={() => emit('setTheme', { selected: theme})}>
+                {`make ${theme}`}
             </button>
           ))
       }
