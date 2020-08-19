@@ -111,7 +111,7 @@ CustomLink.propTypes = {
   isPage: PropTypes.bool,
   newTab: PropTypes.bool,
   onClick: PropTypes.func,
-  as: PropTypes.oneOfType(Object.values(styles)),
+  as: PropTypes.oneOf(Object.values(styles)),
   title: PropTypes.string,
   download: PropTypes.string,
 };

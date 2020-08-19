@@ -86,7 +86,7 @@ Button.displayName = 'Button';
 
 Button.propTypes = {
   classes: PropTypes.string,
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   onClick: PropTypes.func,
   primary: PropTypes.bool,
   disabled: PropTypes.bool,

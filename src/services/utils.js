@@ -1,4 +1,5 @@
-import CustomError from '../utilities/error';
+import { throwCustomError } from '../utilities/error';
+import { ERROR_TYPES } from '../enums';
 
 export const HTTP_CODE_UNAUTHORIZED = 401;
 export const HTTP_CODE_SERVICE_UNAVAILABLE = 503;
@@ -13,11 +14,13 @@ export const isUnauthorizedError = status =>
 
 export const throwNetworkError = () => {
   if (window.navigator.onLine) {
-    throw CustomError(
-      'Sorry, it looks like you lost your internet connection. Please check your connection and try again.'
+    throwCustomError(
+      new Error('no internet connection'),
+      ERROR_TYPES.noInternetConnection
     );
   }
-  throw CustomError(
-    'Sorry, it looks like our servers are currently not reachable. Please try again later.'
+  throwCustomError(
+    new Error('server not reachable'),
+    ERROR_TYPES.serversNotReachable
   );
 };

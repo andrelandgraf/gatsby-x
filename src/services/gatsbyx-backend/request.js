@@ -7,6 +7,7 @@ import {
   throwNetworkError,
 } from '../utils';
 import { getAccessToken } from '../../utilities/storage';
+import { throwCustomError } from '../../utilities/error';
 
 const tag = 'httpService';
 
@@ -25,6 +26,7 @@ function postHeaders() {
 }
 
 const handleError = (err, endpoint, method, request) => {
+  console.tag(tag).debug('error response', err.response);
   console
     .tag(tag)
     .error(`Error in ${method} request to entpoint ${endpoint}`, err);
@@ -35,7 +37,7 @@ const handleError = (err, endpoint, method, request) => {
   if (isUnauthorizedError(status)) {
     return refreshAuthToken(request);
   }
-  throw err;
+  throw throwCustomError(err);
 };
 
 export const postRequest = (endpoint, data) =>

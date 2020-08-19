@@ -7,6 +7,7 @@ import { registerUser } from '../../services/gatsbyx-backend/user';
 import { UserContext } from '../../contexts/user';
 import { MessageContext } from '../../contexts/message';
 import useStatus from '../../hooks/useStatus';
+import useDisplayErrorMessage from '../../hooks/useDisplayErrorMessage';
 import { Stack, Checkbox, Button, CustomLink } from '../../components';
 
 const Form = styled.form`
@@ -21,6 +22,7 @@ const tag = 'Signup';
 const Signup = () => {
   const { setUser } = useContext(UserContext);
   const { setMessage, setType } = useContext(MessageContext);
+  const displayErrorMessage = useDisplayErrorMessage();
   const { isLoading, setStatus } = useStatus();
   const [givenName, setGivenName] = useState('');
   const [familyName, setFamilyName] = useState('');
@@ -87,6 +89,7 @@ const Signup = () => {
 
       try {
         setStatus(LOADING_STATUS.isLoading);
+        setMessage();
         const fetchedUser = await registerUser({
           email,
           password,
@@ -100,13 +103,13 @@ const Signup = () => {
       } catch (error) {
         console.tag(tag).error(error);
         setStatus(LOADING_STATUS.hasFailed);
-        setMessage(error.message);
-        setType(MESSAGE_TYPES.error);
+        displayErrorMessage(error);
         return false;
       }
     },
     [
       acceptsProtection,
+      displayErrorMessage,
       email,
       familyName,
       givenName,

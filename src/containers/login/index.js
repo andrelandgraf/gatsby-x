@@ -10,6 +10,7 @@ import { logUserIn, applyResetPw } from '../../services/gatsbyx-backend/user';
 import { BrowserContext } from '../../contexts/browser';
 import { MessageContext } from '../../contexts/message';
 import { UserContext } from '../../contexts/user';
+import useDisplayErrorMessage from '../../hooks/useDisplayErrorMessage';
 import useStatus from '../../hooks/useStatus';
 import { Button, Stack, CustomLink } from '../../components';
 import SEO from '../../components/layout/seo';
@@ -51,6 +52,7 @@ const forgotHash = '#forgot';
 
 const Login = () => {
   const { hash } = useContext(BrowserContext);
+  const displayErrorMessage = useDisplayErrorMessage();
   const { setMessage, setType } = useContext(MessageContext);
   const { user, setUser } = useContext(UserContext);
   const { isLoading, status, setStatus } = useStatus();
@@ -80,25 +82,33 @@ const Login = () => {
   const handleLogin = useCallback(async () => {
     if (email.length < 2 || !password) {
       setMessage(
-        "Please insert your user credentials. You do'nt have an account with us? Just click on signup to create an account with us in no time!"
+        'Please insert your user credentials. Are you a new user? Just click on Signup to create an account with us in no time!'
       );
       setType(MESSAGE_TYPES.warning);
       return false;
     }
 
     setStatus(LOADING_STATUS.isLoading);
+    setMessage();
     try {
       const fetchedUser = await logUserIn(email, password);
       setStatus(LOADING_STATUS.hasSucceeded);
       setUser(fetchedUser);
       return true;
     } catch (error) {
+      displayErrorMessage(error);
       setStatus(LOADING_STATUS.hasFailed);
-      setMessage(error.message);
-      setType(MESSAGE_TYPES.error);
       return false;
     }
-  }, [email, password, setMessage, setStatus, setType, setUser]);
+  }, [
+    displayErrorMessage,
+    email,
+    password,
+    setMessage,
+    setStatus,
+    setType,
+    setUser,
+  ]);
 
   const handleForgotPw = useCallback(async () => {
     console.tag(tag).verbose('reset password email on the way!');
@@ -108,6 +118,7 @@ const Login = () => {
     }
 
     setStatus(LOADING_STATUS.isLoading);
+    setMessage();
     try {
       const { message: msg } = await applyResetPw(email);
       console.tag(tag).http(msg);
@@ -119,13 +130,10 @@ const Login = () => {
       return true;
     } catch (error) {
       console.tag(tag).error(error);
-      setStatus(LOADING_STATUS.hasFailed);
-      setMessage(error.message);
-      setType(MESSAGE_TYPES.error);
-      setForgotPassword(false);
+      displayErrorMessage(error);
       return false;
     }
-  }, [email, setMessage, setStatus, setType]);
+  }, [displayErrorMessage, email, setMessage, setStatus, setType]);
 
   const handleSubmit = useCallback(
     async event => {

@@ -1,6 +1,8 @@
 import axios from 'axios';
 import qs from 'qs';
 
+import { ERROR_TYPES } from '../../enums';
+import { throwCustomError } from '../../utilities/error';
 import API from './api';
 import {
   setAccessToken,
@@ -13,7 +15,6 @@ import {
   isUnauthorizedError,
   throwNetworkError,
 } from '../utils';
-import CustomError, { isCustomError } from '../../utilities/error';
 
 const tag = 'authService';
 
@@ -48,7 +49,7 @@ const postAuthRequest = (data, headers) =>
     if (isNetworkError(err)) {
       throwNetworkError();
     }
-    throw err;
+    throwCustomError(err);
   });
 
 /**
@@ -62,13 +63,8 @@ export const authenticate = data =>
       return res.data.user;
     })
     .catch(err => {
-      console.tag(tag).error('error in authenticate', err);
-      if (isCustomError(err)) {
-        throw err;
-      }
-      throw CustomError(
-        'It looks like your credentials are wrong. Please check your email address for any typos and retry your password. You can always reset your password in case you forgot it'
-      );
+      console.tag(tag).debug('error in authenticate', err);
+      throwCustomError(err, ERROR_TYPES.wrongCredentials);
     });
 
 const ONE_HOUR = 60 * 60 * 1000; /* ms */
@@ -101,13 +97,12 @@ export const refreshAuthToken = async resolve => {
   resolve().catch(err => {
     console
       .tag(tag)
-      .error(`${err.response.data.code}:${err.response.message}`, err);
+      .debug(`${err.response.data.type}:${err.response.message}`, err);
     const { status } = err.response;
     if (isUnauthorizedError(status)) {
       removeAuthTokens();
-      throw CustomError('Please login again, your session timed out.');
     }
-    throw err;
+    throwCustomError(err, ERROR_TYPES.sessionExpireds);
   });
 };
 
@@ -134,5 +129,5 @@ export const resetPassword = (accessToken, password) =>
       if (isNetworkError(err)) {
         throwNetworkError();
       }
-      throw err;
+      throwCustomError(err, ERROR_TYPES.userNotFound);
     });

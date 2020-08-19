@@ -16,8 +16,8 @@ const MessageBox = styled(motion.div)`
   align-items: center;
   padding: 2vh 2vw;
   margin: 0;
-  min-width: 50%;
-  max-width: 70%;
+  width: 100%;
+  max-width: 800px;
   text-align: left;
   @media screen and (max-width: ${STYLES.breakpoints.phoneWidth}px) {
     font-size: ${STYLES.fontSizes.xs};
