@@ -137,33 +137,36 @@ const NavMenu = () => {
             )
           )}
         </Section>
-        {isLoggedIn && (
-          <>
-            <h1>Profile</h1>
-            <Section>
-              <li className={isLoggedIn ? 'hide' : ''}>
-                <CustomLink link="/signup" isPage>
-                  Signup
-                </CustomLink>
-              </li>
-              <li className={isLoggedIn ? 'hide' : ''}>
-                <CustomLink link="/login" isPage>
-                  Login
-                </CustomLink>
-              </li>
-              <CustomButton
-                key="Logout"
-                onClick={handleLogout}
-                label="Logout"
-                title="Logout"
-              >
-                <Action>
-                  <span>Logout</span>
-                </Action>
-              </CustomButton>
-            </Section>
-          </>
-        )}
+        <h1>Profile</h1>
+        <Section>
+          <Title className={isLoggedIn ? 'hide' : ''}>
+            <CustomLink link="/signup" isPage>
+              Signup
+            </CustomLink>
+          </Title>
+          <Title className={isLoggedIn ? 'hide' : ''}>
+            <CustomLink link="/login" isPage>
+              Login
+            </CustomLink>
+          </Title>
+          <Title className={isLoggedIn ? '' : 'hide'}>
+            <CustomLink link="/password" isPage>
+              Change Password
+            </CustomLink>
+          </Title>
+          {isLoggedIn && (
+            <CustomButton
+              key="Logout"
+              onClick={handleLogout}
+              label="Logout"
+              title="Logout"
+            >
+              <Action>
+                <span>Logout</span>
+              </Action>
+            </CustomButton>
+          )}
+        </Section>
         <h1>Accessibility</h1>
         <Section>{actions.map(action => action)}</Section>
       </Stack>

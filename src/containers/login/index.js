@@ -129,8 +129,8 @@ const Login = () => {
       setType(MESSAGE_TYPES.success);
       return true;
     } catch (error) {
-      console.tag(tag).error(error);
       displayErrorMessage(error);
+      setStatus(LOADING_STATUS.hasFailed);
       return false;
     }
   }, [displayErrorMessage, email, setMessage, setStatus, setType]);

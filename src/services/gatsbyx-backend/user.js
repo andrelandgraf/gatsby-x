@@ -3,8 +3,6 @@ import { postRequest, getRequest, putRequest } from './request';
 import { removeAuthTokens } from '../../utilities/storage';
 import { authenticate, GRANT_TYPES } from './oauth';
 
-const TAG = 'userService';
-
 export const logUserIn = (email, password) => {
   const data = {
     grant_type: GRANT_TYPES.PASSWORD,
