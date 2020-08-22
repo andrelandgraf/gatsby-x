@@ -7,7 +7,7 @@ export const withDefault = () => <Spinner />;
 
 export const withFullscreen = () => <Spinner type={spinnerType.fullpage} />;
 
-export const withTiny = () => <Spinner type={spinnerType.fullpage} />;
+export const withTiny = () => <Spinner type={spinnerType.tiny} />;
 
 export const withMessage = () => (
   <Spinner message="This should only take a moment." />
