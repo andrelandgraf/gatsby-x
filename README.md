@@ -7,7 +7,7 @@
   </a>
 </h2>
 
-Kick off your project with this boilerplate. This starter ships with the many Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+Kick off your project with this boilerplate. This starter ships with the many Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React. Find the corresponding gatsby-x-backend [here](https://github.com/andrelandgraf/gatsby-x-backend).
 
 ## 🚀 Quick start
 
@@ -93,4 +93,6 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gatsbyjs/gatsby-starter-default)
 
-<!-- AUTO-GENERATED-CONTENT:END -->
+## 🔙 The backend
+
+Please find the skeleton backend for this frontend here: https://github.com/andrelandgraf/gatsby-x-backend

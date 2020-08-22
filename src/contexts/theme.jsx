@@ -32,7 +32,7 @@ const themes = {
   light: {
     colors: {
       background: STYLES.colors.white,
-      boxBackground: STYLES.colors.fontWhite,
+      boxBackground: STYLES.colors.white,
       buttonBackground: STYLES.colors.mattWhite,
       headlines: STYLES.colors.black,
       font: STYLES.colors.fontGrey,

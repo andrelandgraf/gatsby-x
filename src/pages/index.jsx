@@ -13,7 +13,7 @@ const treats = [
   {
     name: 'Gatsby',
     reasoning:
-      'Blazing fast static site generator for React. Offers a amazing plugin ecosystem and server-side rendering through GraphQL.',
+      'Blazing fast static site generator for React. Offers an amazing plugin ecosystem and server-side rendering through GraphQL.',
     link: 'https://www.gatsbyjs.org/',
   },
   {
@@ -66,7 +66,7 @@ const treats = [
   {
     name: 'No-Sweat™ Eslint and Prettier by Wes Bos',
     reasoning:
-      'Builds on top of eslint-config-airbnb and manages pretter and eslint "under the hood".',
+      'Builds on top of eslint-config-airbnb and manages prettier and eslint "under the hood".',
     link: 'https://github.com/wesbos/eslint-config-wesbos',
   },
   {
