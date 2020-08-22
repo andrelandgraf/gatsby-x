@@ -2,8 +2,13 @@
   Gatsby Skeleton - GatsbyX
 </h1>
 <h2 align="center">
-  <a href="https://www.demo.andre-landgraf.cool/">
+  <a href="https://demo.andre-landgraf.cool/">
     👉 Live Demo
+  </a>
+</h2>
+<h2 align="center">
+  <a href="https://design-system.andre-landgraf.cool/">
+    📖 Storybook
   </a>
 </h2>
 

@@ -79,9 +79,9 @@ module.exports = {
         name: `Gatsby Skeleton X`,
         short_name: `GatsbyX`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
+        background_color: `#23212c`,
+        theme_color: `#304FFE`,
+        display: `standalone`,
         icon: `src/assets/imgs/logo.png`, // This path is relative to the root of the site.
       },
     },

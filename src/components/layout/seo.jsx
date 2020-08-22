@@ -19,6 +19,8 @@ function SEO({ description, lang, meta, title, shouldIndex }) {
             title
             description
             author
+            image
+            siteUrl
           }
         }
       }
@@ -26,6 +28,7 @@ function SEO({ description, lang, meta, title, shouldIndex }) {
   );
 
   const metaDescription = description || site.siteMetadata.description;
+  const image = `${site.siteMetadata.siteUrl}${site.siteMetadata.image}`;
 
   return (
     <Helmet
@@ -48,8 +51,16 @@ function SEO({ description, lang, meta, title, shouldIndex }) {
           content: metaDescription,
         },
         {
-          property: `og:type`,
-          content: `website`,
+          property: `image`,
+          content: image,
+        },
+        {
+          property: `org:image`,
+          content: image,
+        },
+        {
+          property: `og:url`,
+          content: `${site.siteMetadata.siteUrl}`,
         },
         {
           name: `twitter:card`,
@@ -66,6 +77,10 @@ function SEO({ description, lang, meta, title, shouldIndex }) {
         {
           name: `twitter:description`,
           content: metaDescription,
+        },
+        {
+          name: `twitter:image`,
+          content: image,
         },
         {
           name: 'robots',
