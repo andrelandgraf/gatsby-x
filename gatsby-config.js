@@ -13,7 +13,7 @@ module.exports = {
     title: `GatsbyX`,
     description: `Hello World. I love Gatsby! This is my Gatsby skeleton. There is a lot of tooling and pluggin' around Gatsby and I am tired of doing it from scratch for every new project.`,
     author: `@andrelandgraf94`,
-    image: '/images/Gatsby_Logo.png',
+    image: '/images/logo.png',
   },
   plugins: [
     {
@@ -44,7 +44,8 @@ module.exports = {
       resolve: 'gatsby-plugin-sitemap',
       options: {
         // 404 always excluded
-        exclude: ['/'],
+        // exclude: ['/'] if you want to hide your side from crawling
+        exclude: ['/login', '/signup', '/password'],
       },
     },
     {
@@ -53,7 +54,11 @@ module.exports = {
         resolveEnv: () => NETLIFY_ENV,
         env: {
           production: {
-            policy: [{ userAgent: '*', disallow: ['/'] }],
+            // consider disallowing pages like imprint, login, change password, signup from crawling
+            // disallow: ['/'] to exclude all if you want to hide your side from crawling
+            policy: [
+              { userAgent: '*', disallow: ['/login', '/signup', '/password'] },
+            ],
           },
           'branch-deploy': {
             policy: [{ userAgent: '*', disallow: ['/'] }],
@@ -77,13 +82,21 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/assets/imgs/Gatsby_Logo.png`, // This path is relative to the root of the site.
+        icon: `src/assets/imgs/logo.png`, // This path is relative to the root of the site.
       },
     },
     {
       resolve: 'gatsby-plugin-offline',
       options: {
-        precachePages: ['/', '/404'],
+        precachePages: [
+          '/',
+          '/404',
+          '/login',
+          '/signup',
+          '/dialog',
+          '/password',
+          '/items/*',
+        ],
       },
     },
   ],
