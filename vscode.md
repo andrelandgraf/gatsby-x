@@ -18,6 +18,7 @@ All of them are optional but many might improve your workflow quite a bit.
 - [Polacode](https://marketplace.visualstudio.com/items?itemName=pnp.polacode)
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 - [VSCode MDX](https://marketplace.visualstudio.com/items?itemName=JounQin.vscode-mdx)
+- [Rest Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
 
 ## 🌈 Themes
 
