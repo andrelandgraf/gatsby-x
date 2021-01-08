@@ -19,6 +19,7 @@ All of them are optional but many might improve your workflow quite a bit.
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 - [VSCode MDX](https://marketplace.visualstudio.com/items?itemName=JounQin.vscode-mdx)
 - [Rest Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
+- [Import Cost](https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost)
 
 ## 🌈 Themes
 
